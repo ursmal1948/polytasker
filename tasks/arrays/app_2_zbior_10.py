@@ -1,5 +1,6 @@
 import random
 from collections import defaultdict
+from tasks.arrays.common_functions import get_array_length
 
 """
 2. Napisz program, w którym wygenerujesz tablicę jednowymiarową liczb
@@ -9,26 +10,6 @@ tych dwóch elementów tablicy, pomiędzy którymi występuje najmniejsza
 różnica. Wygeneruj nową tablicę, w której ‘przesuniesz’ dwa wyznaczone
 elementy na koniec tablicy.
 """
-
-
-def get_array_length(r_min, r_max: int) -> int:
-    """
-    Generates a random length for the array within the specified range.
-
-    Parameters:
-        r_min (int): The minimum length of the array.
-        r_max (int): The maximum length of the array.
-
-    Returns:
-        int: The randomly generated length of the array.
-
-    Raises:
-        ValueError: If r_min is greater than r_max.
-    """
-
-    if r_min > r_max:
-        raise ValueError('Incorrect range')
-    return random.randint(r_min, r_max)
 
 
 def generate_n_numbers(size: int, r_min: int, r_max: int) -> list[int]:
