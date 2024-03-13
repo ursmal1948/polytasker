@@ -78,8 +78,8 @@ def select_representative_word_by_first_letter(items: list[str]) -> dict[str, st
     return dict(group_by_letter)
 
 
-def map_characters_to_representative_words(text: str) -> str:
-    strings = read_from_file('strings.txt')
+def map_characters_to_representative_words(text: str, filename: str) -> str:
+    strings = read_from_file(filename)
     representative_word = select_representative_word_by_first_letter(strings)
     mapped_words = [representative_word[char] for char in text]
     return '|'.join(mapped_words)
