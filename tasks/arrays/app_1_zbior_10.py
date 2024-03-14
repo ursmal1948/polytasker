@@ -1,3 +1,5 @@
+from tasks.common_functions import get_array_length
+
 """
 1. Przygotuj tablicę jednowymiarową liczb całkowitych. Wymiar tablicy
 jest losowany z przedziału <10, 100>. Każdy element tablicy ma wartość,
@@ -10,7 +12,7 @@ to cztery największe elementy przyjmujemy jako 5, 4, 3 oraz 2.
 
 
 def main() -> None:
-    pass
+    array_length = get_array_length(10, 100)
 
 
 if __name__ == '__main__':
