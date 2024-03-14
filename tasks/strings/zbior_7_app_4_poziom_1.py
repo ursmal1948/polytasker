@@ -1,4 +1,4 @@
-from typing import Callable
+from tasks.common_functions import get_string_until
 
 """
 Pobieraj od użytkownika napis, dopóki na pozycjach parzystych nie będą
@@ -9,19 +9,6 @@ napisu, które zamieni dwa sąsiadujące ze sobą znaki miejscami.
 Otrzymany zaszyfrowany napis zapisz do pliku tekstowego o nazwie
 zaszyfrowany.txt.
 """
-
-
-def get_string_until(message: str, condition_fn: Callable[[str], bool]) -> str:
-    """
-    Prompts the user
-    :param message: str a message to display to the user
-    :param condition_fn: Callable[[str],bool] a function that takes a string as argument and
-    returns a boolean indicating whether the innput meets certain conditions
-    :return str: text that meets the conditions specified by the condition_fn
-    """
-    while not condition_fn(v := input(f'{message}:\n')):
-        pass
-    return v
 
 
 def is_valid(text: str) -> bool:

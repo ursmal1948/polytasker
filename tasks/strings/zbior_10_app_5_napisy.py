@@ -1,5 +1,5 @@
 import re
-from typing import Callable
+from tasks.common_functions import get_string_until
 
 """
 Napisz program, w którym pobierasz od użytkownika napis, dopóki nie będzie posiadał
@@ -11,10 +11,10 @@ jest B611223366, ponieważ litera B ma kod ASCII 66. Dzielnikami liczby 66 są: 
 """
 
 
-def get_string_until(message: str, condition_fn: Callable[[str], bool]) -> str:
-    while not condition_fn(v := input(f'{message}:\n')):
-        pass
-    return v
+def does_string_match_regex(text: str, regex: str = r'^([A-Z]\d)+$') -> bool:
+    if not re.match(regex, text):
+        return False
+    return True
 
 
 def get_divisors(n: int) -> list[int] | float:
@@ -45,9 +45,3 @@ def replace_digits_with_divisors(text: str) -> str:
         divisors = [d for d in get_divisors(char_code) if d > digit]
         items.extend([char] + divisors)
     return ''.join(str(i) for i in items)
-
-
-def does_string_match_regex(text: str, regex: str = r'^([A-Z]\d)+$') -> bool:
-    if not re.match(regex, text):
-        return False
-    return True

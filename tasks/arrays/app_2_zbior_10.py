@@ -1,6 +1,4 @@
-import random
 from collections import defaultdict
-from tasks.arrays.common_functions import get_array_length
 
 """
 2. Napisz program, w którym wygenerujesz tablicę jednowymiarową liczb
@@ -10,27 +8,6 @@ tych dwóch elementów tablicy, pomiędzy którymi występuje najmniejsza
 różnica. Wygeneruj nową tablicę, w której ‘przesuniesz’ dwa wyznaczone
 elementy na koniec tablicy.
 """
-
-
-def generate_n_numbers(size: int, r_min: int, r_max: int) -> list[int]:
-    """
-    Generates a list of random integers within the specified range.
-
-    Parameters:
-        size (int): The size of the list.
-        r_min (int): The minimum value of the range (inclusive).
-        r_max (int): The maximum value of the range (inclusive).
-
-    Returns:
-        list[int]: A list of random integers within the range.
-
-    Raises:
-        ValueError: If r_min is greater than r_max.
-    """
-
-    if r_min > r_max:
-        raise ValueError('Incorrect range')
-    return [random.randint(r_min, r_max) for _ in range(size)]
 
 
 def get_indexes_with_smallest_difference(numbers: list[int]) -> list[tuple[int, int]]:
