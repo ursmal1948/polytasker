@@ -1,0 +1,7 @@
+Brian;Evans;27;2500 [Earbuds;Electronics;120 Sunglasses;Clothes;40 Chicken;Groceries;6]
+Rachel;Murphy;29;3000 [Charger;Electronics;30 Skirt;Clothes;55 Bread;Groceries;3]
+Justin;Parker;31;1000 [Headphones;Electronics;400 Tie;Clothes;25 Apples;Groceries;4]
+Nicole;Edwards;33;300 [Tablet;Electronics;800 Leggings;Clothes;30 Milk;Groceries;2]
+Brandon;Morris;35;175 [Microphone;Electronics;100 Belt;Clothes;80 Eggs;Groceries;4]
+Eric;Ross;30;400 [Speaker;Electronics;100 Ham;Groceries;10]
+Heather;Bell;36;800 [Headphones;Electronics;750 CostSmA;Nwm;10000]

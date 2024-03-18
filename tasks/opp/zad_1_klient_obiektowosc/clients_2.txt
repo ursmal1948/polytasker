@@ -1,0 +1,7 @@
+Kimberly;Rivera;28;8000 [Keyboard;Electronics;500 Cardigan;Clothes;45 Pasta;Groceries;3 Pasta;Groceries;3]
+Eric;Ross;30;400 [Camera;Electronics;2000 Hoodie;Clothes;70 Juice;Groceries;4]
+Megan;Patterson;32;9900 [Thermomix;Electronics;2000 Watch;Clothes;150 Cheese;Groceries;5]
+Alexander;Russell;48;5000 [Dress;Clothes;300 Lipstick;Beauty;20]
+Gregory;Cooper;34;1260 [Speaker;Electronics;500 Jeans;Clothes;80 Bread;Groceries;3]
+Heather;Bell;36;800 [Headphones;Electronics;750 Dress;Clothes;120 Sauce;Groceries;4]
+Kimberly;Rivera;28;8000 [Keyboard;Electronics;500 STHNEW;NWM;599]
