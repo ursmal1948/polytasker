@@ -9,7 +9,9 @@ jak czytana od końca. Oblicz sumę nieparzystych cyfr tej liczby.
 
 
 def draw_number_until(r_min: int,
-                      r_max: int, condition_fn: Callable[[int], bool], finisher_fn: Callable[[int], int]):
+                      r_max: int,
+                      condition_fn: Callable[[int], bool],
+                      finisher_fn: Callable[[int], int]):
     """
     Draws a number within a given range until a certain condition is met
     :param condition_fn: Callable[[int],int] a function that takes an integer and returns a boolean value

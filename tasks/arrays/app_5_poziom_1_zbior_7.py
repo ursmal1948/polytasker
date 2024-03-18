@@ -12,14 +12,17 @@ element tablicy o najmniejszej sumie cyfr.
 
 
 class ArrayOperations:
-    def __init__(self, size: int = 10):
+
+    def __init__(self, size: int = 10, numbers: list[int] = None):
         self.size = size
-        self.numbers = self.generate_numbers()
+        if not numbers:
+            self.numbers = self._generate_numbers()
+        self.numbers = numbers
 
     def get_numbers(self):
         return self.numbers
 
-    def generate_numbers(self, r_min: int = 0) -> list[int]:
+    def _generate_numbers(self, r_min: int = 0) -> list[int]:
         r_max = 2 * self.size
         unique_elements = set()
         if r_min > r_max:
