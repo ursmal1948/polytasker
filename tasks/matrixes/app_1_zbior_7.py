@@ -26,6 +26,8 @@ e) najmniejszy element z każdej kolumny zwiększ o największą wartość
 z wiersza o tym samym numerze co analizowana kolumna,
 tylko wtedy jak rows==columns
 
+Analizowan kolumna: 3, w takim wypadku musialabym zwiekszyc najmniejszy
+element z kolumny 3 o najwieksza wartosc z wiersza 3. 
 1 2 3 4
 5 6 7 8
 
@@ -44,18 +46,18 @@ class MatrixGenerator:
     max_val: int = 30
 
     @staticmethod
-    def draw_number(r_min: int = 10, r_max: int = 20) -> int:
+    def _draw_number(r_min: int = 10, r_max: int = 20) -> int:
         if r_min > r_max:
             raise ValueError('Incorrect range')
         return random.randint(r_min, r_max)
 
     def generate_matrix(self) -> list[list[int]]:
         # rows, columns = self.draw_number(self.min_size, self.max_size), random.randint(self.min_size, self.max_size)
-        rows = self.draw_number(self.min_size, self.max_size)
-        columns = self.draw_number(self.min_size, self.max_size)
+        rows = self._draw_number(self.min_size, self.max_size)
+        columns = self._draw_number(self.min_size, self.max_size)
         rows = 6
         columns = 7
-        return [[self.draw_number(self.min_val, self.max_val) for _ in range(columns)] for _ in range(rows)]
+        return [[self._draw_number(self.min_val, self.max_val) for _ in range(columns)] for _ in range(rows)]
 
 
 class MatrixAnalysis:
@@ -70,7 +72,6 @@ class MatrixAnalysis:
 
     def has_diagonal_arithmetic_sequence(self) -> bool:
         common_diff = self.matrix[1][1] - self.matrix[0][0]
-
         for i in range(1, len(self.matrix) - 1):
             diff = self.matrix[i + 1][i + 1] - self.matrix[i][i]
             if diff != common_diff:
@@ -79,7 +80,6 @@ class MatrixAnalysis:
 
     def get_row_with_highest_sd(self):
         group_by_sd = defaultdict(list)
-
         for index, row in enumerate(self.matrix):
             sd = statistics.stdev(row)
             group_by_sd[sd].append(index)
@@ -90,11 +90,11 @@ class MatrixAnalysis:
     # tworzą najdłuższy ciąg rosnący o różnicy większej o 3
 
     # dlugosc ciagu rosnacego dla wiersza. 0 jesli nie jest rosnacy od pierwszego indexu
+    # czy elementy wiersza tworza ciag arytmetyczny
     def get_row_increasing_sequence_length(self, row: int, diff: int) -> int:
         if not self.matrix[row][1] - self.matrix[row][0] > diff:
             return 0
         count = 1
-
         for i in range(2, len(self.matrix[row])):
             if self.matrix[row][i] - self.matrix[row][i - 1] > diff:
                 count += 1
@@ -107,8 +107,8 @@ class MatrixAnalysis:
         grouped_by_sequence = defaultdict(list)
 
         for i in range(len(self.matrix)):
-            count_of_sequence = self.get_row_increasing_sequence_length(i, diff)
-            grouped_by_sequence[count_of_sequence].append(i)
+            length_of_sequence = self.get_row_increasing_sequence_length(i, diff)
+            grouped_by_sequence[length_of_sequence].append(i)
             print(grouped_by_sequence.items())
         return max(grouped_by_sequence.items())[1]
 

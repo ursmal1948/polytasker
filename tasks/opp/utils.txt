@@ -1,0 +1,48 @@
+@dataclass
+# class ClientProduct:
+#     client_name: str
+#     client_surname: str
+#     client_age: int
+#     cash: int
+#     product_name: str
+#     product_category: str
+#     product_price: int
+#
+#     @classmethod
+#     def from_text(cls, text: str) -> Self:
+#         data = text.split(' ')
+#         client_data = data[0].split(';')
+#         print(data)
+#         purchase_data = data[1].split(';')
+#         return cls(
+#             client_name=client_data[0],
+#             client_surname=client_data[1],
+#             client_age=int(client_data[2]),
+#             cash=int(client_data[3]),
+#             product_name=purchase_data[0],
+#             product_category=purchase_data[1],
+#             product_price=int(purchase_data[2])
+#         )
+
+
+#
+#
+# class ClientsFileReader:
+#     def get_clients(self, filename: str) -> list[Client]:
+#         with open(filename, 'r') as f:
+#             clients = [Client.from_text(c.strip()) for c in f.readlines()]
+#             return clients
+#
+#
+# class ProductsFileReader:
+#     def get_products(self, filename: str) -> list[Product]:
+#         products_ = []
+#         with open(filename, 'r') as f:
+#             data = [c.strip().split(' ', 1)[1] for c in f.readlines()]
+#
+#             for products in data:
+#                 for product in products.split(' '):
+#                     print(product)
+#                     products_.append(product)
+#
+#         return products_
