@@ -48,19 +48,17 @@ def save_to_file(filename: str, data: list[int]) -> None:
         f.writelines('\n'.join([str(d) for d in data]))
 
 
-# OPTYMALNY SPOSOB
 def count_palindromic_pairs(numbers: list[int]) -> int:
     """
     Counts the number of palindromic pairs in a list of numbers
     :param numbers: list[int] the list of numbers to search for palindromic pairs
     :return int: the number of palindromic pairs found in the list
     """
+
     count = 0
-    palindromic_numbers = sum(1 for n in numbers if is_palindrome(str(n)))  # 11,22 101,etc
-    print(palindromic_numbers)
-    count -= palindromic_numbers
-    for n in numbers:
-        palindrome_number = ''.join((str(d) for d in str(n)))[::-1]
-        if int(palindrome_number) in numbers:
-            count += 1
-    return int(count / 2)
+    for i in range(len(numbers) - 1):
+        palindrome = ''.join([d for d in str(numbers[i])[::-1]])
+        for j in range(i + 1, len(numbers)):
+            if int(palindrome) == numbers[j]:
+                count += 1
+    return count
