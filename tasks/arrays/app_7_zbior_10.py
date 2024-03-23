@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from tasks.common_functions import get_array_length, generate_n_numbers
+from tasks.common_functions import rand_number, generate_n_numbers
 
 """
 Write a program in which you generate a one-dimensional array of integers. The size of the array is randomly
@@ -30,7 +30,7 @@ def get_unique_digits(numbers: list[int]) -> list[int]:
 
 
 def main() -> None:
-    array_length = get_array_length(10, 20)
+    array_length = rand_number(10, 20)
     numbers = generate_n_numbers(array_length, 100, 999)
     print(f'NUMBERS: {numbers}')
     unique_digits = get_unique_digits(numbers)
