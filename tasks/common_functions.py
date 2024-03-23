@@ -2,7 +2,7 @@ import random
 from typing import Callable
 
 
-def get_array_length(r_min, r_max: int) -> int:
+def rand_number(r_min, r_max: int) -> int:
     """
     Generates a random length for the array within the specified range.
 
@@ -45,12 +45,38 @@ def generate_n_numbers(size: int, r_min: int, r_max: int) -> list[int]:
 
 def get_string_until(message: str, condition_fn: Callable[[str], bool]) -> str:
     """
-    Prompts the user
-    :param message: str a message to display to the user
-    :param condition_fn: Callable[[str],bool] a function that takes a string as argument and
-    returns a boolean indicating whether the innput meets certain conditions
-    :return str: text that meets the conditions specified by the condition_fn
+    Prompts the user with a message until the input meets certain conditions specified by the condition_fn.
+
+    Parameters:
+        message (str): A message to display to the user.
+        condition_fn (Callable[[str], bool]): A function that takes a string as an argument and returns
+            a boolean indicating whether the input meets certain conditions.
+
+    Returns:
+        str: Text that meets the conditions specified by the condition_fn.
     """
+
     while not condition_fn(v := input(f'{message}:\n')):
         pass
+    return v
+
+
+def get_number(message: str) -> int:
+    """
+    Prompts the user with a message to input a number and returns the input as an integer.
+
+    Parameters:
+        message (str): The message to prompt the user for input.
+
+    Returns:
+        int: The integer input by the user.
+
+    Raises:
+        ValueError: If the input cannot be converted to an integer.
+    """
+
+    try:
+        v = int(input(f'{message}:\n'))
+    except Exception as e:
+        raise ValueError(e.args[0])
     return v

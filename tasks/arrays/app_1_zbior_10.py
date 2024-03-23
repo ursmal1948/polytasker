@@ -1,6 +1,6 @@
 import random
 from typing import Callable
-from tasks.common_functions import get_array_length
+from tasks.common_functions import rand_number
 from algohub.algorithms.numbers.primes import is_prime_basic
 
 """
@@ -120,7 +120,7 @@ def get_highest(numbers: list[int], count: int) -> list[int]:
 
 
 def main() -> None:
-    array_length = get_array_length(10, 100)
+    array_length = rand_number(10, 100)
     print(f'Array length: {array_length}')
     numbers = generate_n_numbers_until_predicate(size=array_length,
                                                  predicate_fn=lambda n: is_prime_basic(calculate_digits_sum(n)))

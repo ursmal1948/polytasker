@@ -1,5 +1,5 @@
 from collections import defaultdict
-from tasks.common_functions import get_array_length, generate_n_numbers
+from tasks.common_functions import rand_number, generate_n_numbers
 
 """
 Write a program in which you generate a one-dimensional array of integers. The size of the array is randomly
@@ -60,7 +60,7 @@ def move_elements_to_the_end(numbers: list[int], indexes: list[tuple[int, int]])
 
 
 def main() -> None:
-    array_length = get_array_length(10, 40)
+    array_length = rand_number(10, 40)
     numbers = generate_n_numbers(array_length, 30, 50)
     print(numbers)
     indexes = find_indexes_with_smallest_difference(numbers)
