@@ -2,6 +2,7 @@ import random
 import statistics
 from dataclasses import dataclass
 from collections import defaultdict
+from typing import Callable
 from algohub.algorithms.numbers.digits import sum_digits
 
 """
@@ -52,11 +53,8 @@ class MatrixGenerator:
         return random.randint(r_min, r_max)
 
     def generate_matrix(self) -> list[list[int]]:
-        # rows, columns = self.draw_number(self.min_size, self.max_size), random.randint(self.min_size, self.max_size)
         rows = self._draw_number(self.min_size, self.max_size)
         columns = self._draw_number(self.min_size, self.max_size)
-        rows = 6
-        columns = 7
         return [[self._draw_number(self.min_val, self.max_val) for _ in range(columns)] for _ in range(rows)]
 
 
@@ -78,13 +76,15 @@ class MatrixAnalysis:
                 return False
         return True
 
-    def get_row_with_highest_sd(self):
+    def get_row_with_extreme_sd(self, extreme_fn: Callable[[list[float]], float]):
+
         group_by_sd = defaultdict(list)
         for index, row in enumerate(self.matrix):
             sd = statistics.stdev(row)
             group_by_sd[sd].append(index)
-        print(group_by_sd.items())
-        return max(group_by_sd.items(), key=lambda e: e[0])[1]
+        extreme_value = extreme_fn(list(group_by_sd.keys()))
+        result = group_by_sd[extreme_value]
+        return result[0] if len(result) == 1 else result
 
     # c) wyznacz wiersz, w którym elementy począwszy od kolumny numer zero
     # tworzą najdłuższy ciąg rosnący o różnicy większej o 3
@@ -110,6 +110,7 @@ class MatrixAnalysis:
             length_of_sequence = self.get_row_increasing_sequence_length(i, diff)
             grouped_by_sequence[length_of_sequence].append(i)
             print(grouped_by_sequence.items())
+
         return max(grouped_by_sequence.items())[1]
 
 
@@ -126,24 +127,25 @@ class MatrixOperations:
                 third_matrix[i][j] = sum_digits(self.matrix[i][j]) + sum_digits(second_matrix[i][j])
         return third_matrix
 
-# def main() -> None:
-#     matrix = MatrixGenerator().generate_matrix()
-#     for row in matrix:
-#         print(row)
-#     matrix_analysis = MatrixAnalysis(matrix)
-#     print("GREATER THAN DIAGONAL ROW 3")
-#     print(matrix_analysis.count_elements_greater_than_diagonal_by(3))
-#     print('HAS DIAGONAL ARITHMETIC SEQUENCE')
-#     print(matrix_analysis.has_diagonal_arithmetic_sequence())
-#     print('ROW WITH HWIGHESR SD')
-#     print(matrix_analysis.get_row_with_highest_sd())
-#     print("ROW WITH LONGEST INCREASING SEQUENCE")
-#     print(matrix_analysis.get_row_with_longest_increasing_sequence(3))
-#
-#     matrix_operations = MatrixOperations(matrix)
-#     print('THIRD MATRIX')
-#     print(matrix_operations.generate_third_matrix(-30, 30))
-#
-#
-# if __name__ == '__main__':
-#     main()
+
+def main() -> None:
+    matrix = MatrixGenerator().generate_matrix()
+    for row in matrix:
+        print(row)
+    matrix_analysis = MatrixAnalysis(matrix)
+    print("GREATER THAN DIAGONAL ROW 3")
+    print(matrix_analysis.count_elements_greater_than_diagonal_by(3))
+    print('HAS DIAGONAL ARITHMETIC SEQUENCE')
+    print(matrix_analysis.has_diagonal_arithmetic_sequence())
+    print('ROW WITH EXTREME SD')
+    print(matrix_analysis.get_row_with_extreme_sd(lambda sds: min(sds)))
+    print("ROW WITH LONGEST INCREASING SEQUENCE")
+    print(matrix_analysis.get_row_with_longest_increasing_sequence(3))
+
+    matrix_operations = MatrixOperations(matrix)
+    print('THIRD MATRIX')
+    print(matrix_operations.generate_third_matrix(-30, 30))
+
+
+if __name__ == '__main__':
+    main()
