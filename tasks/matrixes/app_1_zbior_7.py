@@ -10,18 +10,16 @@ Zad 1
 Przygotuj tablicę kwadratową o dowolnym wymiarze z przedziału <4, 7>
 oraz dowolnie losowanych elementach z przedziału <-30, 30>.
 a) sprawdź, ile elementów w danym wierszu jest większych co najmniej
-o 5 od elementu na przekątnej w tym wierszu, DONE
+o 5 od elementu na przekątnej w tym wierszu
+
 b) sprawdź, czy elementy na przekątnej począwszy od elementu w
 wierszu zerowym tworzą rosnący ciąg arytmetyczny o elementach
-dodatnich, DONE
+dodatnich
 c) wyznacz wiersz, w którym elementy począwszy od kolumny numer zero
-tworzą najdłuższy ciąg rosnący o różnicy większej o 3 done
-
-default dictem pogruowac wg dlugosci ciagu rosnacego. Jezeli
-od pierwszego elemetnu nie jest rosnacy to dlugosc wynosi 0  
+tworzą najdłuższy ciąg rosnący o różnicy większej o 3 
 
 d) wyznacz wiersz, w którym odchylenie standardowe elementów ma
-najmniejszą wartość,  DONE
+najmniejszą wartość
 
 e) najmniejszy element z każdej kolumny zwiększ o największą wartość
 z wiersza o tym samym numerze co analizowana kolumna,
@@ -35,7 +33,7 @@ element z kolumny 3 o najwieksza wartosc z wiersza 3.
 f) utwórz drugą tablicę o tych samych wymiarach, a następnie wyznacz
 trzecią tablicę. Trzecia tablica zawiera na każdej pozycji
 wartość będącą sumą cyfr elementów z tablicy pierwszej i drugiej
-elementów na tej samej pozycji.  done
+elementów na tej samej pozycji.
 """
 
 
@@ -86,11 +84,6 @@ class MatrixAnalysis:
         result = group_by_sd[extreme_value]
         return result[0] if len(result) == 1 else result
 
-    # c) wyznacz wiersz, w którym elementy począwszy od kolumny numer zero
-    # tworzą najdłuższy ciąg rosnący o różnicy większej o 3
-
-    # dlugosc ciagu rosnacego dla wiersza. 0 jesli nie jest rosnacy od pierwszego indexu
-    # czy elementy wiersza tworza ciag arytmetyczny
     def get_row_increasing_sequence_length(self, row: int, diff: int) -> int:
         if not self.matrix[row][1] - self.matrix[row][0] > diff:
             return 0
