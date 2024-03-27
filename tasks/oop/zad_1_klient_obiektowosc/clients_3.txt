@@ -5,3 +5,4 @@ Christina;Ramirez;45;4300 [Camera;Electronics;4000 Sweater;Clothes;110 Bread;Gro
 Alexander;Russell;48;5000 [Macbook;Electronics;2500 Jacket;Clothes;700 Chicken;Groceries;6]
 Megan;Patterson;32;9900 [Milk;Groceries;20 Macbook;Electronics;4000]
 Heather;Bell;36;800 [Headphones;Electronics;750 CostSmA;Nwm;10000]
+Ula;MALINOWSKA;100;200 [l;Groceries;123 k;Groceries;123 l;Groceries;123 l;Groceries;123]
