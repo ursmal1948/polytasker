@@ -239,10 +239,6 @@ class Lists:
         return diff_1 + diff_2 + diff_3
 
 
-#
-# ->> Sort the three lists in descending order and check for which index the difference between elements of the
-# three lists is the smallest, and for which index the difference between elements of the three lists is the largest.
-#
 def main() -> None:
     filename = 'data/numbers.txt'
     lists = Lists.from_file(filename)
