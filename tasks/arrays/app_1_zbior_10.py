@@ -100,7 +100,7 @@ def calculate_digits_sum(n: int) -> int:
     return sum(int(d) for d in str(nn))
 
 
-def get_highest(numbers: list[int], count: int) -> list[int]:
+def get_highest_n_elements(numbers: list[int], count: int) -> list[int]:
     """
     Get the highest n elements from a list.
 
@@ -126,7 +126,7 @@ def main() -> None:
                                                  predicate_fn=lambda n: is_prime_basic(calculate_digits_sum(n)))
     print(f'Numbers: {numbers}')
     sum_of_extreme_elements = process_n_extreme_elements(numbers, 4,
-                                                         lambda nums, count: get_highest(nums, count),
+                                                         lambda nums, count: get_highest_n_elements(nums, count),
                                                          lambda nums: sum(nums))
     print(f'Sum of extreme elements: {sum_of_extreme_elements}')
 

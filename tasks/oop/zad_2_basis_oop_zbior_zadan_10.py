@@ -24,12 +24,13 @@ class FileService:
             return [line.strip() for line in f.readlines()]
 
     @staticmethod
-    def write(filename: str, data: str) -> None:
-        pass
+    def write(filename: str, data: list[str]) -> None:
+        with open(filename, 'w') as f:
+            f.writelines(data[i] + "\n" if i != len(data) - 1 else data[i] for i in range(len(data)))
 
 
 @dataclass
-class Numbers:
+class EncodedNumber:
     initial_base: int = 2
     target_base: int = 4
     code_1_number: str | int = ''
@@ -39,24 +40,34 @@ class Numbers:
         nums = text.split(' ')
         return cls(int(nums[0]), int(nums[1]), nums[2])
 
-    def convert_(self):
-        number_decimal = int(self.code_1_number, int(self.initial_base))
-        print(f'DECIMAL: {number_decimal}')
-        converted_number = Converter.convert_base(number_decimal, self.target_base)
+    def convert(self):
+        decimal_number = int(self.code_1_number, int(self.initial_base))
+        print(f'DECIMAL: {decimal_number}')
+        converted_number = Converter.convert_base(decimal_number, self.target_base)
         return converted_number
 
 
 @dataclass
-class NumbersService:
-    many_numbers: list[Numbers] = field(default_factory=list)
+class EncodedNumbersService:
+    numbers: list[EncodedNumber] = field(default_factory=list)
 
     def __str__(self) -> str:
-        return f'Many numbers: {self.many_numbers}'
+        return f'Encoded numbers.: {self.numbers}'
+
+    def convert_numbers(self):
+        converted_numbers = []
+        for number in self.numbers:
+            converted_number = number.convert()
+            converted_numbers.append(converted_number)
+        return converted_numbers
+
+    def write_converted_numbers(self, filename: str) -> None:
+        FileService.write(filename, self.convert_numbers())
 
     @classmethod
     def from_file(cls, filename: str) -> Self:
         lines = FileService.read(filename)
-        return cls([Numbers.from_text(line) for line in lines])
+        return cls([EncodedNumber.from_text(line) for line in lines])
 
 
 class Converter:
@@ -73,8 +84,12 @@ class Converter:
 
 
 def main() -> None:
-    n = Numbers(4, 2, '20')
-    print(n.convert_())
+    n = EncodedNumber(4, 2, '20')
+    print(n.convert())
+    numbers_service = EncodedNumbersService.from_file('data/codes.txt')
+    print(numbers_service)
+    print(numbers_service.convert_numbers())
+    numbers_service.write_converted_numbers("data/encoded.txt")
 
 
 if __name__ == '__main__':
