@@ -27,15 +27,3 @@ def get_unique_digits(numbers: list[int]) -> list[int]:
 
     unique_digits = OrderedDict.fromkeys(int(d) for number in numbers for d in str(number))
     return list(unique_digits)
-
-
-def main() -> None:
-    array_length = rand_number(10, 20)
-    numbers = generate_n_numbers(array_length, 100, 999)
-    print(f'NUMBERS: {numbers}')
-    unique_digits = get_unique_digits(numbers)
-    print(f'UNIQUE DIGITS: {unique_digits}')
-
-
-if __name__ == '__main__':
-    main()

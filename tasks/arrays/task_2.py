@@ -57,17 +57,3 @@ def move_elements_to_the_end(numbers: list[int], indexes: list[tuple[int, int]])
         else:
             not_indexed_numbers.append(numbers[i])
     return not_indexed_numbers + indexed_numbers
-
-
-def main() -> None:
-    array_length = rand_number(10, 40)
-    numbers = generate_n_numbers(array_length, 30, 50)
-    print(numbers)
-    numbers = [30, 40, 50, 60, 70]
-    indexes = find_indexes_with_smallest_difference(numbers)
-    print(indexes)
-    print(move_elements_to_the_end(numbers, indexes))
-
-
-if __name__ == '__main__':
-    main()
