@@ -86,13 +86,3 @@ def replace_digits_with_divisors(text: str) -> str:
         divisors = [d for d in get_divisors(char_code) if d > digit]
         items.extend([char] + divisors)
     return ''.join(str(i) for i in items)
-
-
-def main() -> None:
-    text = get_string_until("Get string", lambda string: does_string_match_regex(string))
-    modified_text = replace_digits_with_divisors(text)
-    print(f'Modified text: {modified_text}')
-
-
-if __name__ == '__main__':
-    main()

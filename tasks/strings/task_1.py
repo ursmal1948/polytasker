@@ -36,7 +36,7 @@ def count_vowels(text: str) -> int:
         int: The count of vowels in the text.
     """
 
-    return sum(1 for c in text if c.lower() in 'aeyuio')
+    return sum(1 for c in text if c.isalpha() and c.lower() in 'aeyuio')
 
 
 def get_strings(message: str, count: int = 3, mapper_fn: Callable[[str], int] = count_vowels) -> str:
@@ -79,14 +79,3 @@ def rearrange_vowels_consonants(text: str) -> str:
     vowels = [c for c in text if c.isalpha() and c.lower() in 'aeyuio']
     consonants = [c for c in text if c.isalpha() and c.lower() not in 'aeyuio']
     return "".join(vowels + consonants)
-
-
-def main() -> None:
-    combined_string = get_strings("Get string", 3)
-    print(f'Combined string: {combined_string}')
-    rearranged_string = rearrange_vowels_consonants(combined_string)
-    print(f'Rearranged string: {rearranged_string}')
-
-
-if __name__ == '__main__':
-    main()
