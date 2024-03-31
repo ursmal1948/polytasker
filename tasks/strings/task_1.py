@@ -39,7 +39,7 @@ def count_vowels(text: str) -> int:
     return sum(1 for c in text if c.isalpha() and c.lower() in 'aeyuio')
 
 
-def get_strings(message: str, count: int = 3, mapper_fn: Callable[[str], int] = count_vowels) -> str:
+def get_strings_with_condition(message: str, count: int = 3, mapper_fn: Callable[[str], int] = count_vowels) -> str:
     """
     Get strings from the user until the number of vowels in each string is the same.
 
@@ -52,13 +52,25 @@ def get_strings(message: str, count: int = 3, mapper_fn: Callable[[str], int] = 
     Returns:
         str: A concatenated string of the inputs.
     """
+    strings = []
+    mapped_values = []
 
-    while True:
-        strings = [get_string(f'{i + 1}.{message}') for i in range(count)]
-        vowels_count = [mapper_fn(string) for string in strings]
+    while len(set(mapped_values)) != 1:
+        strings.clear()
+        mapped_values.clear()
+        for i in range(count):
+            string = get_string(f'{i + 1}.{message}')
+            strings.append(string)
+            mapped_values.append(mapper_fn(string))
+    return ''.join(strings)
 
-        if all(count == vowels_count[0] for count in vowels_count):
-            return ''.join(strings)
+
+# while True:
+#     strings = [get_string(f'{i + 1}.{message}') for i in range(count)]
+#     vowels_count = [mapper_fn(string) for string in strings]
+#
+#     if all(count == vowels_count[0] for count in vowels_count):
+#         return ''.join(strings)
 
 
 def rearrange_vowels_consonants(text: str) -> str:

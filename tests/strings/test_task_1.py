@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from tasks.strings.task_1 import get_string, count_vowels, get_strings, rearrange_vowels_consonants
+from tasks.strings.task_1 import get_string, count_vowels, get_strings_with_condition, rearrange_vowels_consonants
 
 
 class TestTask1(unittest.TestCase):
@@ -38,3 +38,9 @@ class TestTask1(unittest.TestCase):
             with self.subTest(text=text):
                 rearranged_text = rearrange_vowels_consonants(text)
                 self.assertEqual(rearranged_text, exp_rearranged_text)
+
+    @patch("tasks.strings.task_1.get_string")
+    def test_get_string_with_condition(self, mock_get_string):
+        mock_get_string.side_effect = ["hello", "apple", "pear"]
+        result = get_strings_with_condition("Enter a string", 3, lambda str: count_vowels(str))
+        self.assertEqual(result, "helloapplepear")
