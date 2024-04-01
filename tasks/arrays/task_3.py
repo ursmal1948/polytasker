@@ -12,6 +12,26 @@ the smallest sum of digits.
 """
 
 
+def rand_number(r_min, r_max: int) -> int:
+    """
+    Generates a random length for the array within the specified range.
+
+    Parameters:
+        r_min (int): The minimum length of the array.
+        r_max (int): The maximum length of the array.
+
+    Returns:
+        int: The randomly generated length of the array.
+
+    Raises:
+        ValueError: If r_min is greater than r_max.
+    """
+
+    if r_min > r_max:
+        raise ValueError("Min value is greater than max value=")
+    return random.randint(r_min, r_max)
+
+
 @dataclass
 class ArrayGenerator:
     """
@@ -37,7 +57,7 @@ class ArrayGenerator:
 
         unique_numbers = set()
         while len(unique_numbers) < self.size:
-            drawn_number = random.randint(self.r_min, self.r_max)
+            drawn_number = rand_number(self.r_min, self.r_max)
             unique_numbers.add(drawn_number)
         return list(unique_numbers)
 
