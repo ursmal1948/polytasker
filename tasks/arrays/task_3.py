@@ -114,7 +114,8 @@ class ArrayOperations:
         grouped_elements = defaultdict(list)
         for n in self.numbers:
             key_ = mapper_fn(n)
-            grouped_elements[key_].append(n)
+            if key_:
+                grouped_elements[key_].append(n)
         extreme_digit = finisher_fn(list(grouped_elements.keys()))
         result = grouped_elements[extreme_digit]
         return result[0] if len(result) == 1 else result
