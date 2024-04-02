@@ -1,39 +1,15 @@
-import random
 from collections import defaultdict
-from tasks.arrays.common_functions import get_array_length
+from tasks.common_functions import rand_number, generate_n_numbers
 
 """
-2. Napisz program, w którym wygenerujesz tablicę jednowymiarową liczb
-całkowitych. Rozmiar tablicy losowany jest z przedziału <10, 40>.
-Elementy tablicy losowane są z przedziału < 30, 50>. Wyznacz indeksy
-tych dwóch elementów tablicy, pomiędzy którymi występuje najmniejsza
-różnica. Wygeneruj nową tablicę, w której ‘przesuniesz’ dwa wyznaczone
-elementy na koniec tablicy.
+Write a program in which you generate a one-dimensional array of integers. The size of the array is randomly
+chosen from the range <10, 40>. The elements of the array are randomly selected from the range <30, 50>. Determine 
+the indexes of the two elements in the array with the smallest difference. Generate a new array by moving the two
+determined elements to the end of the array.
 """
 
 
-def generate_n_numbers(size: int, r_min: int, r_max: int) -> list[int]:
-    """
-    Generates a list of random integers within the specified range.
-
-    Parameters:
-        size (int): The size of the list.
-        r_min (int): The minimum value of the range (inclusive).
-        r_max (int): The maximum value of the range (inclusive).
-
-    Returns:
-        list[int]: A list of random integers within the range.
-
-    Raises:
-        ValueError: If r_min is greater than r_max.
-    """
-
-    if r_min > r_max:
-        raise ValueError('Incorrect range')
-    return [random.randint(r_min, r_max) for _ in range(size)]
-
-
-def get_indexes_with_smallest_difference(numbers: list[int]) -> list[tuple[int, int]]:
+def find_indexes_with_smallest_difference(numbers: list[int]) -> list[tuple[int, int]]:
     """
     Finds indexes of two elements in the list with the smallest difference.
 
@@ -42,6 +18,10 @@ def get_indexes_with_smallest_difference(numbers: list[int]) -> list[tuple[int, 
 
     Returns:
         list[tuple[int,int]]: A list of tuples containing the indexes of the elements with the smallest difference.
+
+    Example:
+        input: [100,200,250,400,450,600,700,800]
+        output: [(1, 2), (3, 4)]
     """
 
     group_by_difference = defaultdict(list)
@@ -62,6 +42,10 @@ def move_elements_to_the_end(numbers: list[int], indexes: list[tuple[int, int]])
 
     Returns:
         list[int]: A new list with elements moved to the end.
+
+    Example:
+        Input: numbers: [100,200,250,400,450,600,700,800] indexes: [(1, 2), (3, 4)]
+        Output: [100,200,250,400,450,600,700,800]
     """
 
     not_indexed_numbers = []

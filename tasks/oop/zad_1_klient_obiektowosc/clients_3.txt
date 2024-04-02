@@ -1,0 +1,8 @@
+Joshua;Reed;38;3000 [Kindle;Electronics;250 Shorts;Clothes;100 Milk;Groceries;2]
+Stephanie;Wood;40;1000 [E-book;Electronics;800 Blouse;Clothes;100 Apples;Groceries;3]
+Kenneth;Hayes;42;1750 [Mixer;Electronics;3200 Trousers;Clothes;90 Yogurt;Groceries;4]
+Christina;Ramirez;45;4300 [Camera;Electronics;4000 Sweater;Clothes;110 Bread;Groceries;5]
+Alexander;Russell;48;5000 [Macbook;Electronics;2500 Jacket;Clothes;700 Chicken;Groceries;6]
+Megan;Patterson;32;9900 [Milk;Groceries;20 Macbook;Electronics;4000]
+Heather;Bell;36;800 [Headphones;Electronics;750 CostSmA;Nwm;10000]
+Ula;MALINOWSKA;100;200 [l;Groceries;123 k;Groceries;123 l;Groceries;123 l;Groceries;123]

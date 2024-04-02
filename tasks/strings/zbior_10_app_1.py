@@ -39,14 +39,13 @@ def generate_string(length: int, even_min_char: str, even_max_char: str, odd_min
             chars.append(rand_chr(even_min_char, even_max_char))
         else:
             chars.append(rand_chr(odd_min_char, odd_max_char))
-
     return ''.join(chars)
 
 
 def count_feature_occurrences(
         text: str,
-        featuer_check: Callable[[str], bool] = lambda c: ord(c) % 5 == 0):
-    return sum(1 for c in text if featuer_check(c))
+        feature_check: Callable[[str], bool] = lambda c: ord(c) % 5 == 0):
+    return sum(1 for c in text if feature_check(c))
 
 
 def modify_text(text: str) -> str:

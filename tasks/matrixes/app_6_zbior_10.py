@@ -2,14 +2,11 @@ import random
 from typing import Callable
 
 """
-6. Napisz program, w którym przygotujesz tablicę dwuwymiarową
-przechowującą liczby całkowite. Liczba wierszy i kolumn losowane są
-z przedziału <2, 20> dopóki liczba wierszy nie będzie różnić się
-co najmniej o 3 od połowy wartości wylosowanej liczby kolumn. Elementy
-tablicy losowane są z przedziału <30, 100>. Wyznacz numery wierszy,
-dla których średnia arytmetyczna elementów ma wartość pomiędzy
-wartościami średniej arytmetycznej elementów wierszy sąsiednich.
-Wyzeruj wiersze, które nie mają tej własności.
+Write a program in which you prepare a two-dimensional array storing integers. The number of rows and columns
+are randomly chosen from the range <2, 20> until the number of rows differs by at least 3 from half the value 
+of the randomly chosen number of columns. The elements of the array are randomly chosen
+from the range <30, 100>. Determine the row numbers for which the arithmetic mean of elements is between the
+arithmetic means of neighboring rows. Zero out the rows that do not have this property.
 """
 
 
@@ -78,7 +75,7 @@ def find_rows_with_averages_between_neighbours(averages: list[float]) -> list[in
     """
     Finds the indexes of rows whose average values are between the averages of their neighboring rows.
 
-    Args:
+    Parameters:
         averages (list[float]): A list containing the average value of elements for each row of the matrix.
 
     Returns:
@@ -105,3 +102,21 @@ def zero_out_rows_not_matching_indexes(matrix: list[list[int]], indexes: list[in
     """
 
     return [matrix[i] if i in indexes else [0] * len(matrix[i]) for i in range(len(matrix))]
+
+
+def main() -> None:
+    rows, columns = get_size_of_matrix_until_predicate()
+    print(f'Size of matrix rows: {rows} columns: {columns}')
+    matrix = generate_matrix(rows, columns)
+    for m in matrix:
+        print(m)
+    rows_average = calculate_rows_average(matrix)
+    print(f'Rows average: {rows_average}')
+    indexes = find_rows_with_averages_between_neighbours(rows_average)
+    print(f'Rows with average between neighbours: {indexes}')
+    new_matrix = zero_out_rows_not_matching_indexes(matrix, indexes)
+    print(f'New matrix: {new_matrix}')
+
+
+if __name__ == '__main__':
+    main()

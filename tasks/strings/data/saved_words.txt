@@ -1,0 +1,5 @@
+window
+flower
+string
+wheel
+car
