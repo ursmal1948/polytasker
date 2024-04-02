@@ -1,3 +1,4 @@
+import re
 from dataclasses import dataclass, field
 from typing import Self
 
@@ -30,26 +31,28 @@ class FileService:
 
 
 @dataclass
-class EncodedNumber:
+class EncodedLine:
     initial_base: int = 2
     target_base: int = 4
     code_1_number: str | int = ''
 
     @classmethod
     def from_text(cls, text: str) -> Self:
+        if not re.match(r'^\d|10 \d|10 \d+$', text):
+            raise ValueError("Incorrect format of the data")
+
         nums = text.split(' ')
         return cls(int(nums[0]), int(nums[1]), nums[2])
 
     def convert(self):
-        decimal_number = int(self.code_1_number, int(self.initial_base))
+        decimal_number = int(self.code_1_number, self.initial_base)
         print(f'DECIMAL: {decimal_number}')
-        converted_number = Converter.convert_base(decimal_number, self.target_base)
-        return converted_number
+        return Converter.convert_base(decimal_number, self.target_base)
 
 
 @dataclass
-class EncodedNumbersService:
-    numbers: list[EncodedNumber] = field(default_factory=list)
+class EncodedLinesService:
+    numbers: list[EncodedLine] = field(default_factory=list)
 
     def __str__(self) -> str:
         return f'Encoded numbers.: {self.numbers}'
@@ -67,7 +70,7 @@ class EncodedNumbersService:
     @classmethod
     def from_file(cls, filename: str) -> Self:
         lines = FileService.read(filename)
-        return cls([EncodedNumber.from_text(line) for line in lines])
+        return cls([EncodedLine.from_text(line) for line in lines])
 
 
 class Converter:
@@ -84,9 +87,9 @@ class Converter:
 
 
 def main() -> None:
-    n = EncodedNumber(4, 2, '20')
+    n = EncodedLine(2, 4, '1010')
     print(n.convert())
-    numbers_service = EncodedNumbersService.from_file('data/codes.txt')
+    numbers_service = EncodedLinesService.from_file('data/codes.txt')
     print(numbers_service)
     print(numbers_service.convert_numbers())
     numbers_service.write_converted_numbers("data/encoded.txt")

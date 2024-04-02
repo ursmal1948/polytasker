@@ -25,7 +25,7 @@ class TestTask3Functions:
         assert swapped_text == expected_swapped_text
 
 
-class TestFileFunction(unittest.TestCase):
+class TestSaveToFileFunction(unittest.TestCase):
     def test_save_to_file(self):
         with patch("builtins.open") as mock_open:
             filename = "encrypted.txt"

@@ -65,14 +65,6 @@ def get_strings_with_condition(message: str, count: int = 3, mapper_fn: Callable
     return ''.join(strings)
 
 
-# while True:
-#     strings = [get_string(f'{i + 1}.{message}') for i in range(count)]
-#     vowels_count = [mapper_fn(string) for string in strings]
-#
-#     if all(count == vowels_count[0] for count in vowels_count):
-#         return ''.join(strings)
-
-
 def rearrange_vowels_consonants(text: str) -> str:
     """
     Rearrange the characters in the text so that vowels appear first, followed by consonants.
