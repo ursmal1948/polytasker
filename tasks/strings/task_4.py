@@ -52,8 +52,8 @@ def get_common_words(words1: list[str], words2: list[str]) -> list[str]:
 
 def chars_1_group_exceeds_chars_2_group_count(
         text: str,
-        group_1_regex: str = r'(?![aeyuio])[a-z]',
-        group_2_regex: str = r'[aeyuio]'
+        group_1_regex: str = r'(?![aeyuioAEYUIO])[a-zA-Z]',
+        group_2_regex: str = r'[aeyuioAEYUIO]'
 ) -> bool:
     """
     Check if the count of consonants exceeds the count of vowels in a text.
@@ -123,7 +123,7 @@ def create_string_from_file(filename: str, separator: str) -> str:
 
 
 def main() -> None:
-    words_1 = read_from_file('data /words.txt')
+    words_1 = read_from_file('data/words.txt')
     words_2 = read_from_file('data/words_2.txt')
     print(f'Words from first file: {words_1}')
     print(f'Words from second file: {words_2}')
