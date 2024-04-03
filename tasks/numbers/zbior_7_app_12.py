@@ -66,6 +66,7 @@ def generate_n_unique_numbers(n: int, r_min: int, r_max: int) -> list[int]:
     return list(unique_numbers)
 
 
+# todo count pairs meeting condition
 def count_palindromic_pairs(numbers: list[int]) -> int:
     """
     Counts the number of palindromic pairs in a list of numbers

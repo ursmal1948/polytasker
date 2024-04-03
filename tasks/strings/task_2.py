@@ -79,9 +79,6 @@ def get_pairs_matching_regex(text: str, regex: str = r'([A-Z])(\d)') -> list[tup
     return [(char1, char2) for char1, char2 in pairs]
 
 
-print(get_pairs_matching_regex("2a8B9Z",r'(\d)([A-Za-z])'))
-
-
 def digit_to_str(digit: int) -> str:
     """
     Convert a digit to its string representation.

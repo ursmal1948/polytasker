@@ -113,11 +113,11 @@ class ShoppingService:
 
     def find_client_with_extreme_spendings_by(self, category: str, extreme_fn: Callable[[list[int]], int]) -> list[int]:
         grouped_by_category_spending = defaultdict(list)
+
         for client in self.clients.keys():
             sum_ = self.calculate_client_spendings_by_category(client, category)
             if sum_:
                 grouped_by_category_spending[sum_].append(client)
-
         extreme_spendings = extreme_fn(list(grouped_by_category_spending.keys()))
         return grouped_by_category_spending[extreme_spendings]
 

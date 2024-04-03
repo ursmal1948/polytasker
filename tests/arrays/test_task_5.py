@@ -11,7 +11,7 @@ class TestTask5Functions(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open, read_data="10.0\n12.8\n17.9\n8.2\n15.0\n")
     def test_read_data_from_file(self, mock_open):
-        result = read_data_from_file("test_file.txt")
+        result = read_data_from_file("test_file2.txt")
         self.assertEqual(result, [10.0, 12.8, 17.9, 8.2, 15.0])
 
     def test_when_file_has_inorrect_extension(self):

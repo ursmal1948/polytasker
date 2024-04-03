@@ -1,5 +1,5 @@
+import os.path
 import unittest
-from unittest.mock import patch
 import pytest
 from tasks.strings.task_3 import has_even_odd_ascii_pattern, swap_chars, save_to_file
 
@@ -26,10 +26,13 @@ class TestTask3Functions:
 
 
 class TestSaveToFileFunction(unittest.TestCase):
-    def test_save_to_file(self):
-        with patch("builtins.open") as mock_open:
-            filename = "encrypted.txt"
-            text = "HELLO"
+    def setUp(self):
+        self.test_text = "This is a test"
+        self.test_filename = "../data/test_file.txt"
 
-            save_to_file(filename, text)
-            mock_open.assert_called_once_with(filename, "w")
+    def test_save_to_file(self):
+        save_to_file(self.test_filename, self.test_text)
+        self.assertTrue(os.path.exists(self.test_filename))
+
+        with open(self.test_filename, 'r') as f:
+            self.assertEqual(f.read(), self.test_text)
