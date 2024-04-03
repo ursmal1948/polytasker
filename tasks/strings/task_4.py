@@ -1,4 +1,6 @@
+import re
 from typing import Callable
+from collections import defaultdict
 
 """
 In two text files prepared by you, each line contains words. We don't know how many words are in each file.
@@ -41,19 +43,25 @@ def get_common_words(words1: list[str], words2: list[str]) -> list[str]:
         list[str]: A list of words common to both input lists.
 
     Example:
-        Input: words1 = ["garden", "ball", "bottle", "glass", "sun"], words2 = ["sheet", "picture", "sun", "ball","eye"]
+        Input: words1 = ["garden", "ball", "sun"], words2 = ["sheet", "picture", "sun", "ball"]
         Output: ["ball", "sun"]
     """
 
     return [word for word in words1 if word in words2]
 
 
-def consonants_exceeds_vowels_count(text: str) -> bool:
+def chars_1_group_exceeds_chars_2_group_count(
+        text: str,
+        group_1_regex: str = r'(?![aeyuio])[a-z]',
+        group_2_regex: str = r'[aeyuio]'
+) -> bool:
     """
     Check if the count of consonants exceeds the count of vowels in a text.
 
     Parameters:
         text (str): The input text.
+        group_1_regex (str): First group of chars.
+        group_2_regex (str): Second group of chars
 
     Returns:
         bool: True if the count of consonants exceeds the count of vowels, False otherwise.
@@ -66,9 +74,17 @@ def consonants_exceeds_vowels_count(text: str) -> bool:
         Output: True
     """
 
-    consonants_count = sum(1 for c in text if c.isalpha() and c.lower() not in 'aeyuio')
-    vowels_count = sum(1 for c in text if c.isalpha() and c.lower() in 'aeyuio')
-    return consonants_count > vowels_count
+    grouped_by_chars = defaultdict(int)
+
+    for char in text:
+        if re.match(group_1_regex, char):
+            grouped_by_chars[group_1_regex] += 1
+        elif re.match(group_2_regex, char):
+            grouped_by_chars[group_2_regex] += 1
+    first_group_count = grouped_by_chars[group_1_regex]
+    second_group_count = grouped_by_chars[group_2_regex]
+
+    return first_group_count > second_group_count
 
 
 def save_filtered_items_to_file(filename: str, items: list[str], filter_fn: Callable[[str], bool]) -> None:
@@ -107,14 +123,14 @@ def create_string_from_file(filename: str, separator: str) -> str:
 
 
 def main() -> None:
-    words_1 = read_from_file('data/words.txt')
+    words_1 = read_from_file('data /words.txt')
     words_2 = read_from_file('data/words_2.txt')
     print(f'Words from first file: {words_1}')
     print(f'Words from second file: {words_2}')
     common_words = get_common_words(words_1, words_2)
     print(f'Common words: {common_words}')
     save_filtered_items_to_file('data/saved_words.txt', common_words,
-                                lambda text: consonants_exceeds_vowels_count(text))
+                                lambda text: chars_1_group_exceeds_chars_2_group_count(text))
     string_from_file = create_string_from_file('data/saved_words.txt', ',')
     print(f'String from file: {string_from_file}')
 
