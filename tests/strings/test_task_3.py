@@ -28,7 +28,7 @@ class TestTask3Functions:
 class TestSaveToFileFunction(unittest.TestCase):
     def setUp(self):
         self.test_text = "This is a test"
-        self.test_filename = "../data/test_file.txt"
+        self.test_filename = "/Users/python/Desktop/dev/PROJEKTY_GIT/polytasker/tests/strings/data/test_task_3.txt"
 
     def test_save_to_file(self):
         save_to_file(self.test_filename, self.test_text)
