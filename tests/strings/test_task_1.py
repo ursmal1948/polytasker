@@ -61,7 +61,7 @@ class TestTask1(unittest.TestCase):
             result = get_strings_until_same_chars_count(
                 message="Get string",
                 count=count,
-                regex="\d",
+                regex=r'\d',
                 chars_count_fn=lambda text, regex: count_chars(text, regex)
             )
             self.assertEqual(result, "one12two34")

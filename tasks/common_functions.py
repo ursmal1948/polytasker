@@ -80,3 +80,25 @@ def get_number(message: str) -> int:
     except Exception as e:
         raise ValueError(e.args[0])
     return v
+
+
+def get_positive_number(message: str) -> int:
+    """
+    Get an integer input from the user.
+
+    Parameters:
+        message (str): The message to display to the user.
+
+    Returns:
+        int: The integer entered by the user.
+    """
+
+    while True:
+        try:
+            num = int(input(f'{message}:\n'))
+            if num > 0:
+                return num
+            else:
+                print('Enter a positive integer')
+        except ValueError:
+            print('Please enter a valid integer')

@@ -1,5 +1,6 @@
 from collections import Counter
 from dataclasses import dataclass
+import random
 
 """
 Generate a string consisting of only letters 'a' or 'b' of a length specified earlier by the user.
@@ -7,7 +8,6 @@ The string must be generated in such a way that the difference in the number of 
 and 'a' in the string is not greater than 1. Then modify the string so that consecutive letters 'a' and 'b' alternate.
 For example, if the string 'abbbaaba' was generated at the beginning, after modification you should get 'abababab'.
 """
-import random
 
 
 @dataclass
