@@ -3,8 +3,6 @@ from unittest.mock import patch
 import pytest
 
 from tasks.numbers.task_3 import (
-    read_from_file,
-    save_to_file,
     generate_n_unique_numbers,
     count_pairs_meeting_condition,
     is_consecutive_pair,
