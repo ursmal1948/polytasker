@@ -7,15 +7,10 @@ from tasks.strings.task_4 import (
 )
 
 
-@pytest.fixture
-def file_path():
-    return '/Users/python/Desktop/dev/PROJEKTY_GIT/polytasker/tests/strings/data/words.txt'
-
-
 class TestTask4Functions:
 
-    def test_read_from_file(self, file_path):
-        words = read_from_file(file_path)
+    def test_read_from_file(self):
+        words = read_from_file('tests/strings/data/task_4_words.txt')
         expected_words = ["banana", "note", "tomato", "potato", "wheel"]
         assert words == expected_words
 
@@ -45,7 +40,7 @@ class TestTask4Functions:
         result = chars_1_group_exceeds_chars_2_group_count(text, regex_1, regex_2)
         assert result == expected_result
 
-    def test_create_string_from_file(self, file_path):
+    def test_create_string_from_file(self):
         separator = ","
-        items = create_string_from_file(file_path, separator)
+        items = create_string_from_file('tests/strings/data/task_4_words.txt', separator)
         assert items == 'banana,note,potato,tomato,wheel'

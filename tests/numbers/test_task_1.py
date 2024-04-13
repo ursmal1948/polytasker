@@ -2,15 +2,10 @@ from tasks.numbers.task_1 import count_changes_to_form_googol_number, read_numbe
 import pytest
 
 
-@pytest.fixture
-def numbers_file_path():
-    return "/Users/python/Desktop/dev/PROJEKTY_GIT/polytasker/tests/numbers/number/nums.txt"
-
-
 class TestTask1Functions:
 
-    def test_read_numbers_from_file(self, numbers_file_path):
-        numbers = read_numbers_from_file(numbers_file_path)
+    def test_read_numbers_from_file(self):
+        numbers = read_numbers_from_file('tests/numbers/data/task_1_nums.txt')
         expected_numbers = [1, 2, 3, 4]
         assert numbers == expected_numbers
 
