@@ -61,14 +61,14 @@ def sort_items(*args) -> list[float]:
     return sort_items(less_than_pivot) + equal_to_pivot + sort_items(greater_than_pivot)
 
 
-def main() -> None:
-    filename1 = "data/file1.txt"
-    filename2 = "data/file2.txt"
-    numbers1, numbers2 = read_data_from_file(filename1), read_data_from_file(filename2)
-    sorted_numbers = sort_items(numbers1, numbers2)
-    print(f'SORTED COLLECTION: {sorted_numbers}')
-    print(sort_items([1, 2, 3], [4, 5,2, 6]))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     filename1 = "data/file1.txt"
+#     filename2 = "data/file2.txt"
+#     numbers1, numbers2 = read_data_from_file(filename1), read_data_from_file(filename2)
+#     sorted_numbers = sort_items(numbers1, numbers2)
+#     print(f'SORTED COLLECTION: {sorted_numbers}')
+#     print(sort_items([1, 2, 3], [4, 5,2, 6]))
+#
+#
+# if __name__ == '__main__':
+#     main()

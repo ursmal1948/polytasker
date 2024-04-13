@@ -121,24 +121,24 @@ class MatrixOperations:
         return third_matrix
 
 
-def main() -> None:
-    matrix = MatrixGenerator().generate_matrix()
-    for row in matrix:
-        print(row)
-    matrix_analysis = MatrixAnalysis(matrix)
-    print("GREATER THAN DIAGONAL ROW 3")
-    print(matrix_analysis.count_elements_greater_than_diagonal_by(3))
-    print('HAS DIAGONAL ARITHMETIC SEQUENCE')
-    print(matrix_analysis.has_diagonal_arithmetic_sequence())
-    print('ROW WITH EXTREME SD')
-    print(matrix_analysis.get_row_with_extreme_sd(lambda sds: min(sds)))
-    print("ROW WITH LONGEST INCREASING SEQUENCE")
-    print(matrix_analysis.get_row_with_longest_increasing_sequence(3))
-
-    matrix_operations = MatrixOperations(matrix)
-    print('THIRD MATRIX')
-    print(matrix_operations.generate_third_matrix(-30, 30))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     matrix = MatrixGenerator().generate_matrix()
+#     for row in matrix:
+#         print(row)
+#     matrix_analysis = MatrixAnalysis(matrix)
+#     print("GREATER THAN DIAGONAL ROW 3")
+#     print(matrix_analysis.count_elements_greater_than_diagonal_by(3))
+#     print('HAS DIAGONAL ARITHMETIC SEQUENCE')
+#     print(matrix_analysis.has_diagonal_arithmetic_sequence())
+#     print('ROW WITH EXTREME SD')
+#     print(matrix_analysis.get_row_with_extreme_sd(lambda sds: min(sds)))
+#     print("ROW WITH LONGEST INCREASING SEQUENCE")
+#     print(matrix_analysis.get_row_with_longest_increasing_sequence(3))
+#
+#     matrix_operations = MatrixOperations(matrix)
+#     print('THIRD MATRIX')
+#     print(matrix_operations.generate_third_matrix(-30, 30))
+#
+#
+# if __name__ == '__main__':
+#     main()

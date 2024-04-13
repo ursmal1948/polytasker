@@ -96,14 +96,14 @@ def rearrange_group1_group2_chars(text: str, group1_chars: str, group2_chars: st
     return ''.join(grouped_by_chars[group1_chars] + grouped_by_chars[group2_chars])
 
 
-def main() -> None:
-    string = get_strings_until_same_chars_count("POdaj stringa", 2,
-                                                chars_count_fn=lambda text, regex: count_chars(text, regex))
-    # text = rearrangr_group1_group2_chars("WAISTCOAT", 'AEYUIO', 'WSTC')
-    print(string)
-    string = 'SA123oj'
-    # print(count_chars(text, r'[a-z]'))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     string = get_strings_until_same_chars_count("POdaj stringa", 2,
+#                                                 chars_count_fn=lambda text, regex: count_chars(text, regex))
+#     # text = rearrangr_group1_group2_chars("WAISTCOAT", 'AEYUIO', 'WSTC')
+#     print(string)
+#     string = 'SA123oj'
+#     # print(count_chars(text, r'[a-z]'))
+#
+#
+# if __name__ == '__main__':
+#     main()

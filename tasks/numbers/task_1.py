@@ -50,12 +50,12 @@ def count_changes_to_form_googol_number(numbers: list[int]) -> int:
     return non_zero_digits_count + (1 if numbers[0] != 1 else 0)
 
 
-def main() -> None:
-    filename = 'data/googol.txt'
-    digits = read_numbers_from_file(filename)
-    changes_count = count_changes_to_form_googol_number(digits)
-    print(f'CHANGES TO BE MADE TO FORM A GOOGOL NUMBER: {changes_count}')
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     filename = 'data/googol.txt'
+#     digits = read_numbers_from_file(filename)
+#     changes_count = count_changes_to_form_googol_number(digits)
+#     print(f'CHANGES TO BE MADE TO FORM A GOOGOL NUMBER: {changes_count}')
+#
+#
+# if __name__ == '__main__':
+#     main()

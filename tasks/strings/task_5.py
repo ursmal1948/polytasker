@@ -83,14 +83,14 @@ class CharacterPair:
         return new_text
 
 
-def main() -> None:
-    char1 = "a"
-    char2 = "b"
-    character_pair = CharacterPair(char1, char2)
-    balanced_string = character_pair.generate_balanced_string(9)
-    print(balanced_string)
-    print(character_pair.alternate_chars(balanced_string))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     char1 = "a"
+#     char2 = "b"
+#     character_pair = CharacterPair(char1, char2)
+#     balanced_string = character_pair.generate_balanced_string(9)
+#     print(balanced_string)
+#     print(character_pair.alternate_chars(balanced_string))
+#
+#
+# if __name__ == '__main__':
+#     main()

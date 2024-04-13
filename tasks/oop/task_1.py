@@ -114,20 +114,20 @@ class EncodedLinesService:
         return cls([line for line in encoded_lines if not line.is_same_code()])
 
 
-def main() -> None:
-    n = EncodedLine(2, 4, '1010')
-    print(n.convert())
-    numbers_service = EncodedLinesService.from_file('data/codes.txt')
-    print(numbers_service)
-    print(numbers_service.convert_numbers())
-    numbers_service.write_converted_numbers("data/encoded.txt")
-    print(EncodedLine(3, 2, '1212').convert())
-    # print(EncodedLine(2, 16, '11011').convert())
-    print(EncodedLine(10, 16, '14').convert())
-    lines = EncodedLinesService.from_file("data/codes.txt")
-    print(lines)
-    print(Converter.convert_to_base(22, 8))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     n = EncodedLine(2, 4, '1010')
+#     print(n.convert())
+#     numbers_service = EncodedLinesService.from_file('data/codes.txt')
+#     print(numbers_service)
+#     print(numbers_service.convert_numbers())
+#     numbers_service.write_converted_numbers("data/encoded.txt")
+#     print(EncodedLine(3, 2, '1212').convert())
+#     # print(EncodedLine(2, 16, '11011').convert())
+#     print(EncodedLine(10, 16, '14').convert())
+#     lines = EncodedLinesService.from_file("data/codes.txt")
+#     print(lines)
+#     print(Converter.convert_to_base(22, 8))
+#
+#
+# if __name__ == '__main__':
+#     main()

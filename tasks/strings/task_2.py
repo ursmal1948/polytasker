@@ -144,12 +144,11 @@ def replace_digits_with(text: str, replacer_fn: Callable[[int], str]) -> str:
         modified_items.extend([char] + [replacement])
     return "".join(modified_items)
 
-
-def main() -> None:
-    text = "B9D5"
-    print(get_pairs_matching_regex(text))
-    print(replace_digits_with(text, lambda digit: get_digit_divisors(digit)))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     text = "B9D5"
+#     print(get_pairs_matching_regex(text))
+#     print(replace_digits_with(text, lambda digit: get_digit_divisors(digit)))
+#
+#
+# if __name__ == '__main__':
+#     main()

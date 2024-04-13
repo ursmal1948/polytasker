@@ -121,19 +121,18 @@ def create_string_from_file(filename: str, separator: str) -> str:
     items = read_from_file(filename)
     return f'{separator}'.join(sorted(items))
 
-
-def main() -> None:
-    words_1 = read_from_file('data/words.txt')
-    words_2 = read_from_file('data/words_2.txt')
-    print(f'Words from first file: {words_1}')
-    print(f'Words from second file: {words_2}')
-    common_words = get_common_words(words_1, words_2)
-    print(f'Common words: {common_words}')
-    save_filtered_items_to_file('data/saved_words.txt', common_words,
-                                lambda text: chars_1_group_exceeds_chars_2_group_count(text))
-    string_from_file = create_string_from_file('data/saved_words.txt', ',')
-    print(f'String from file: {string_from_file}')
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     words_1 = read_from_file('data/words.txt')
+#     words_2 = read_from_file('data/words_2.txt')
+#     print(f'Words from first file: {words_1}')
+#     print(f'Words from second file: {words_2}')
+#     common_words = get_common_words(words_1, words_2)
+#     print(f'Common words: {common_words}')
+#     save_filtered_items_to_file('data/saved_words.txt', common_words,
+#                                 lambda text: chars_1_group_exceeds_chars_2_group_count(text))
+#     string_from_file = create_string_from_file('data/saved_words.txt', ',')
+#     print(f'String from file: {string_from_file}')
+#
+#
+# if __name__ == '__main__':
+#     main()

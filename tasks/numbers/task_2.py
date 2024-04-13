@@ -68,12 +68,12 @@ def is_palindrome(number: int) -> bool:
     return string_representation == string_representation[::-1]
 
 
-def main() -> None:
-    # result = draw_number_until(100, 999, lambda num: num > 300,
-    #                            lambda num: sum(int(d) for d in str(num) if int(d) % 2 == 1))
-    # print(f'RESULT: {result}')
-    print(draw_and_process_number_with_condition(condition_fn=lambda num: is_prime_basic(num)))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     # result = draw_number_until(100, 999, lambda num: num > 300,
+#     #                            lambda num: sum(int(d) for d in str(num) if int(d) % 2 == 1))
+#     # print(f'RESULT: {result}')
+#     print(draw_and_process_number_with_condition(condition_fn=lambda num: is_prime_basic(num)))
+#
+#
+# if __name__ == '__main__':
+#     main()

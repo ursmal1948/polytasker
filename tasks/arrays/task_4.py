@@ -107,19 +107,19 @@ def process_n_extreme_elements(
     return finisher_fn(extreme_numbers)
 
 
-def main() -> None:
-    array_length = rand_number(10, 100)
-    print(f'Array length: {array_length}')
-    array_length = 10
-    numbers = generate_n_numbers_until_predicate(size=array_length,
-                                                 predicate_fn=lambda n: is_prime_basic(sum_digits(n)))
-    print(f'Numbers: {numbers}')
-    sum_of_extreme_elements = process_n_extreme_elements(numbers, 4,
-                                                         lambda nums, count: get_highest_n_elements(nums, count),
-                                                         lambda nums: sum(nums))
-    print(f'Sum of extreme elements: {sum_of_extreme_elements}')
-    print(get_highest_n_elements(numbers, 4))
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     array_length = rand_number(10, 100)
+#     print(f'Array length: {array_length}')
+#     array_length = 10
+#     numbers = generate_n_numbers_until_predicate(size=array_length,
+#                                                  predicate_fn=lambda n: is_prime_basic(sum_digits(n)))
+#     print(f'Numbers: {numbers}')
+#     sum_of_extreme_elements = process_n_extreme_elements(numbers, 4,
+#                                                          lambda nums, count: get_highest_n_elements(nums, count),
+#                                                          lambda nums: sum(nums))
+#     print(f'Sum of extreme elements: {sum_of_extreme_elements}')
+#     print(get_highest_n_elements(numbers, 4))
+#
+#
+# if __name__ == '__main__':
+#     main()

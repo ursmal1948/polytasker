@@ -4,7 +4,6 @@ from unittest.mock import patch
 from tasks.numbers.task_4 import (
     get_positive_int,
     get_numbers_until_predicate,
-    get_digit,
     is_condition_met,
     is_digits_sum_even_and_units_greater_than_tens_sum
 )
