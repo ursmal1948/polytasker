@@ -53,7 +53,7 @@ Sorted numbers
 
 Output: 0 (largest difference between elements in the lists is equal 806)
 """
-
+import re
 from dataclasses import dataclass, field
 from typing import Callable
 from collections import defaultdict
@@ -75,29 +75,48 @@ class FileReader:
         """
 
         with open(filename, 'r') as f:
-            return [line.strip() for line in f.readlines()]
+            return f.read().splitlines()
 
 
 @dataclass
-class Lists:
+class Row:
+    def __init__(self, numbers: list[int]) -> None:
+        self.numbers = numbers
+
+    @classmethod
+    def parse(cls, line: str, regex: str = r'(\d+;){2}\d+') -> Self:
+        if not re.match(regex, line):
+            raise ValueError(f"Line does not match regex: {line}")
+        numbers = [int(n) for n in line.split(";")]
+        return cls(numbers)
+
+    def get_numbers(self) -> list[int]:
+        return self.numbers
+
+
+@dataclass
+class Numbers:
     smallest_numbers: list[int] = field(default_factory=list)
     middle_numbers: list[int] = field(default_factory=list)
     highest_numbers: list[int] = field(default_factory=list)
 
+    def get_all_numbers(self) -> list[list[int]]:
+        return [self.smallest_numbers, self.middle_numbers, self.highest_numbers]
+
     @classmethod
     def from_file(cls, filename: str) -> Self:
         """
-         Create Lists object from data in a text file.
+         Create Numbers object from data in a text file.
 
          Parameters:
              filename (str): The name of the file containing data.
 
          Returns:
-             Lists: An instance of Lists populated with data from the file.
+             Numbers: An instance of Lists populated with data from the file.
          """
 
-        items = FileReader.read(filename)
-        numbers = [[int(n) for n in nums.split(';')] for nums in items]
+        lines = FileReader.read(filename)
+        numbers = [Row.parse(line).get_numbers() for line in lines]
         smallest_numbers = [min(sub_numbers) for sub_numbers in numbers]
         middle_numbers = [sorted(sub_numbers)[1] for sub_numbers in numbers]
         highest_numbers = [max(sub_numbers) for sub_numbers in numbers]
@@ -149,7 +168,7 @@ class Lists:
 
         return abs(finisher_fn_1(self.smallest_numbers) - finisher_fn_2(self.middle_numbers))
 
-    def count_elements_meeting_condition(self, condition_fn: Callable[[int], bool]):
+    def count_elements_meeting_condition(self, condition_fn: Callable[[int], bool]) -> int:
         """
          Count elements in the third list meeting a specified condition.
 
@@ -162,7 +181,7 @@ class Lists:
         return sum(1 for num in self.highest_numbers if condition_fn(num))
 
     @staticmethod
-    def get_length_of_non_decreasing_sequence(numbers: list[int]):
+    def get_length_of_non_decreasing_sequence(numbers: list[int]) -> int:
         """
         Calculate the length of the longest non-decreasing sequence in a list.
 
@@ -180,32 +199,31 @@ class Lists:
             if numbers[i] >= numbers[i - 1]:
                 count += 1
             else:
-                break
+                return count
         return count
 
-    def find_extreme_non_decreasing_sequence(self, extreme_fn: Callable[[list[int]], int]) -> int:
+    def find_extreme_non_decreasing_sequence(self, extreme_fn: Callable[[list[int]], int]) -> int | list[int]:
         """
-        Find the list with the longest non-decreasing sequence.
+        Finds the list with the longest non-decreasing sequence.
 
         Parameters:
             extreme_fn (Callable[[list[int]], int]): A function to determine the extreme value.
 
         Returns:
-            int: The number corresponding to the list with the longest non-decreasing sequence.
+            int: The number corresponding to the list (index) with the longest non-decreasing sequence.
         """
 
-        length_l1 = Lists.get_length_of_non_decreasing_sequence(self.smallest_numbers)
-        length_l2 = Lists.get_length_of_non_decreasing_sequence(self.middle_numbers)
-        length_l3 = Lists.get_length_of_non_decreasing_sequence(self.highest_numbers)
-        extreme_value = extreme_fn([length_l1, length_l2, length_l3])
+        grouped_by_non_decreasing_sequence = defaultdict(list)
+        all_numbers = self.get_all_numbers()
+        for i in range(len(all_numbers)):
+            length = Numbers.get_length_of_non_decreasing_sequence(all_numbers[i])
+            grouped_by_non_decreasing_sequence[length].append(i)
 
-        if extreme_value == length_l1:
-            return 1
-        if extreme_value == length_l2:
-            return 2
-        return 3
+        extreme_value = extreme_fn(list(grouped_by_non_decreasing_sequence.keys()))
+        result = grouped_by_non_decreasing_sequence[extreme_value]
+        return result[0] if len(result) == 1 else result
 
-    def find_extreme_difference(self, extreme_fn: Callable[[list[int]], int]) -> int | list[int]:
+    def find_index_of_extreme_difference(self, extreme_fn: Callable[[list[int]], int]) -> int | list[int]:
 
         """
         Find the extreme difference between elements of three lists.
@@ -238,34 +256,43 @@ class Lists:
         diff_3 = abs(sorted_middle[index] - sorted_highest[index])
         return diff_1 + diff_2 + diff_3
 
-
-def main() -> None:
-    filename = 'data/numbers.txt'
-    lists = Lists.from_file(filename)
-    print("-------------------------(1)-------------------------")
-    is_file_perfect = lists.is_file_perfect()
-    print(f'Is file perfect: {is_file_perfect}')
-
-    print("-------------------------(2)-------------------------")
-    diff = lists.get_diff_between(
-        lambda nums: max(nums), lambda nums2: min(nums2)
-    )
-    print(f'Difference between largest element number from first list and smallest from second list: {diff}')
-    count = lists.count_elements_meeting_condition(lambda n: n % diff == 0)
-    print(f'Count of elements divisble by {diff} in the third list: {count}')
-
-    print("-------------------------(3)-------------------------")
-    longest_non_decreasing_sequence = lists.find_extreme_non_decreasing_sequence(lambda nums: max(nums))
-    print(f'Longest non decreasing sequence has list number: {longest_non_decreasing_sequence}')
-    shortest_non_decreasing_sequence = lists.find_extreme_non_decreasing_sequence(lambda nums: min(nums))
-    print(f'Shortest non decreasing sequence has list number: {shortest_non_decreasing_sequence}')
-
-    print("-------------------------(4)-------------------------")
-    smallest_diff = lists.find_extreme_difference(lambda nums: min(nums))
-    largest_diff = lists.find_extreme_difference(lambda nums: max(nums))
-    print(f'Index at which there is the smallest difference between elements: {smallest_diff}')
-    print(f'Index at which there is the the largest difference between elements: {largest_diff}')
-
-
-if __name__ == '__main__':
-    main()
+#
+# def main() -> None:
+#     # filename = 'data/numbers.txt'
+#     # lists = Numbers.from_file(filename)
+#     # print(lists)
+#     # print("-------------------------(1)-------------------------")
+#     # is_file_perfect = lists.is_file_perfect()
+#     # print(f'Is file perfect: {is_file_perfect}')
+#     lists = Numbers([13, 17, 19, 29, 10],
+#                     [28, 25, 58, 60, 49],
+#                     [56, 78, 99, 98, 432])
+#     # print(lists.find_extreme_non_decreasing_sequence(lambda nums: max(nums)))
+#     print(lists.find_index_of_extreme_difference(lambda nums: max(nums)))
+#     #
+#     # print("-------------------------(2)-------------------------")
+#     # diff = lists.get_diff_between(
+#     #     lambda nums: max(nums), lambda nums2: min(nums2)
+#     # )
+#     # print(f'Difference between largest element data from first list and smallest from second list: {diff}')
+#     # count = lists.count_elements_meeting_condition(lambda n: n % diff == 0)
+#     # print(f'Count of elements divisble by {diff} in the third list: {count}')
+#     #
+#     # print("-------------------------(3)-------------------------")
+#     # longest_non_decreasing_sequence = lists.find_extreme_non_decreasing_sequence(lambda nums: max(nums))
+#     # print(f'Longest non decreasing sequence has list data: {longest_non_decreasing_sequence}')
+#     # shortest_non_decreasing_sequence = lists.find_extreme_non_decreasing_sequence(lambda nums: min(nums))
+#     # print(f'Shortest non decreasing sequence has list data: {shortest_non_decreasing_sequence}')
+#     #
+#     # print("-------------------------(4)-------------------------")
+#     # smallest_diff = lists.find_extreme_difference(lambda nums: min(nums))
+#     # largest_diff = lists.find_extreme_difference(lambda nums: max(nums))
+#     # print(f'Index at which there is the smallest difference between elements: {smallest_diff}')
+#     # print(f'Index at which there is the the largest difference between elements: {largest_diff}')
+#     # s = re.match(r'^(\d+;){2}\d+$', '21;2;1')
+#     # r = Row.parse('21;2;1')
+#     # print(r.numbers)
+#
+#
+# if __name__ == '__main__':
+#     main()
