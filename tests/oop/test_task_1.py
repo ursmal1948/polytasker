@@ -65,14 +65,12 @@ class TestEncodedLinesServiceMethods(unittest.TestCase):
             EncodedLine(10, 16, '11')
         ]
         self.conversions = ['122', '1101111', '155', 'B']
-        self.file_path = '/Users/python/Desktop/dev/PROJEKTY_GIT/polytasker/tests/oop/data/codes.txt'
+        self.file_path = 'tests/oop/data/task_1_codes.txt'
 
     def test_convert_numbers(self):
-        for index, encoded_line in enumerate(self.encoded_lines, 0):
-            with self.subTest(encoded_line=encoded_line):
-                expected_result = self.conversions[index]
-                result = encoded_line.convert()
-                self.assertEqual(result, expected_result)
+        encoded_lines_service = EncodedLinesService(self.encoded_lines)
+        converted_numbers = encoded_lines_service.convert_numbers()
+        self.assertEqual(converted_numbers, self.conversions)
 
     def test_from_file(self):
         lines = EncodedLinesService.from_file(self.file_path)
