@@ -30,7 +30,7 @@ def generate_n_numbers_until_predicate(size: int, r_min: int = 100, r_max: int =
         r_max (int): The maximum value for number generation (default is 200).
         predicate_fn (Callable[[int], bool]): The predicate function to satisfy (default is
          sum of digits that has only 2 divisors).
-        (excluding 1 and itself)).
+        (excluding 1 and itself).
 
     Returns:
         list[int]: A list of numbers satisfying the predicate function.

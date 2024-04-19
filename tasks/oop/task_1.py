@@ -45,7 +45,6 @@ class Converter:
     @staticmethod
     def convert_to_hex(number: int) -> str:
         binary_num = Converter.convert_to_base(number, 2)
-        print(binary_num)
         while len(binary_num) % 4 != 0:
             binary_num = '0' + binary_num
         groups_of_four = [binary_num[i:i + 4] for i in range(0, len(binary_num), 4)]

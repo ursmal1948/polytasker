@@ -113,9 +113,11 @@ def create_string_from_file(filename: str, separator: str) -> str:
 
     Parameters:
         filename (str): The name of the file containing words.
+        separator (str): The separator joining the items.
 
     Returns:
         str: A single string containing words from the file, separated by commas and in alphabetical order.
+
     """
 
     items = read_from_file(filename)
