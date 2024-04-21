@@ -6,4 +6,5 @@ Brandon;Morris;35;175 [Microphone;Electronics;100 Belt;Clothes;80 Eggs;Groceries
 Eric;Ross;30;400 [Speaker;Electronics;100 Ham;Groceries;10 Speaker;Electronics;100 Speaker;Electronics;100 Speaker;Electronics;100]
 Heather;Bell;36;800 [Headphones;Electronics;750 CostSmA;Nwm;10000]
 Ula;Bell;36;800 [Headphones;Electronics;1 CostSmA;Spanish;1 KOLEJNY;Norsk;10 n;Norsk;29]
+Ula;Bell;36;800 [Headphones;Electronics;1 CostSmA;Spanish;1 KOLEJNY;Norsk;10 n;Norsk;29]
 Asia;M;36;800 [Headphones;Norsk;1 CostSmA;Spanish;1]

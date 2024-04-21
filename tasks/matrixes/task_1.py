@@ -68,7 +68,7 @@ def calculate_rows_average(matrix: list[list[int]]) -> list[float]:
         list[float]: A list containing the average value of elements for each row in the matrix.
     """
 
-    return [sum(n for n in row) / len(row) for row in matrix]
+    return [round(sum(n for n in row) / len(row), 2) for row in matrix]
 
 
 def find_rows_with_averages_between_neighbours(averages: list[float]) -> list[int]:
@@ -104,19 +104,23 @@ def zero_out_rows_not_matching_indexes(matrix: list[list[int]], indexes: list[in
     return [matrix[i] if i in indexes else [0] * len(matrix[i]) for i in range(len(matrix))]
 
 
-def main() -> None:
-    rows, columns = get_size_of_matrix_until_predicate()
-    print(f'Size of matrix rows: {rows} columns: {columns}')
-    matrix = generate_matrix(rows, columns)
-    for m in matrix:
-        print(m)
-    rows_average = calculate_rows_average(matrix)
-    print(f'Rows average: {rows_average}')
-    indexes = find_rows_with_averages_between_neighbours(rows_average)
-    print(f'Rows with average between neighbours: {indexes}')
-    new_matrix = zero_out_rows_not_matching_indexes(matrix, indexes)
-    print(f'New matrix: {new_matrix}')
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     rows, columns = get_size_of_matrix_until_predicate()
+#     print(f'Size of matrix rows: {rows} columns: {columns}')
+#     matrix = generate_matrix(4, 3, 1, 15)
+#     for m in matrix:
+#         print(m)
+#     matrix = [[7, 10, 13],
+#               [10, 14, 1],
+#               [2, 8, 14],
+#               [12, 9, 8]]
+#     rows_average = calculate_rows_average(matrix)
+#     print(f'Rows average: {rows_average}')
+#     indexes = find_rows_with_averages_between_neighbours(rows_average)
+#     print(f'Rows with average between neighbours: {indexes}')
+#     new_matrix = zero_out_rows_not_matching_indexes(matrix, indexes)
+#     print(f'New matrix: {new_matrix}')
+#
+#
+# if __name__ == '__main__':
+#     main()

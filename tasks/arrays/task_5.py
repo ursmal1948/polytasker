@@ -8,32 +8,32 @@ into one, where the elements are sorted in ascending order according to the sort
 """
 
 
-def read_data_from_files(filename1: str, filename2: str) -> tuple[list[float], list[float]]:
+def read_data_from_file(filename: str) -> list[float]:
     """
-    Reads numerical data from two files and returns them as lists of floats.
+    Reads numerical data from file and returns list of floats.
 
     Parameters:
-        filename1 (str): The path to the first file containing numerical data.
-        filename2 (str): The path to the second file containing numerical data.
+        filename (str): The path to the first file containing numerical data.
 
     Returns:
-        tuple[list[float], list[float]]: A tuple containing two lists of floats, representing
-        the data read from the files.
+        list[float]: A list of floats, representing
+        the data read from the file
 
     Example:
-        Input:   filename1 = "data/file1.txt", filename2 = "data/file2.txt"
+        Input:   filename1 = "data/file1.txt"
         Output: (
-        [10.5, 12.8, 17.9, 24.0, 90.1, 3.14, 17.12, 12.56],
-        [105.2, 1.5, 41.7, 81.5, 15.0, 4.9, 16.12, 76.5, 2.7, 82.3, 15.9, 14.92, 18.28]
-)
+        [10.5, 12.8, 17.9, 24.0, 90.1, 3.14, 17.12, 12.56]
+        )
     """
 
-    with open(filename1, 'r') as f:
-        numbers1 = [float(n) for n in f.readlines()]
+    if not filename.endswith(".txt"):
+        raise AttributeError('File has incorrect extension')
 
-    with open(filename2, 'r') as f:
-        numbers2 = [float(n) for n in f.readlines()]
-    return numbers1, numbers2
+    try:
+        with open(filename, 'r') as f:
+            return [float(n.strip()) for n in f.readlines()]
+    except Exception as e:
+        raise FileNotFoundError(f'File not found: {e}')
 
 
 def sort_items(*args) -> list[float]:
@@ -61,13 +61,14 @@ def sort_items(*args) -> list[float]:
     return sort_items(less_than_pivot) + equal_to_pivot + sort_items(greater_than_pivot)
 
 
-def main() -> None:
-    filename1 = "data/file1.txt"
-    filename2 = "data/file2.txt"
-    numbers1, numbers2 = read_data_from_files(filename1, filename2)
-    sorted_numbers = sort_items(numbers1, numbers2)
-    print(f'SORTED COLLECTION: {sorted_numbers}')
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     filename1 = "data/file1.txt"
+#     filename2 = "data/file2.txt"
+#     numbers1, numbers2 = read_data_from_file(filename1), read_data_from_file(filename2)
+#     sorted_numbers = sort_items(numbers1, numbers2)
+#     print(f'SORTED COLLECTION: {sorted_numbers}')
+#     print(sort_items([1, 2, 3], [4, 5,2, 6]))
+#
+#
+# if __name__ == '__main__':
+#     main()

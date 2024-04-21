@@ -5,7 +5,7 @@ consists of a leading 1 followed by a hundred 0s.
 """
 
 
-def read_from_file(filename: str) -> list[int]:
+def read_numbers_from_file(filename: str) -> list[int]:
     """
     Reads a list of integers from a text file.
 
@@ -43,17 +43,19 @@ def count_changes_to_form_googol_number(numbers: list[int]) -> int:
            7, 0, 5, 0]
         Output: 83
     """
+    if len(numbers) != 101:
+        raise ValueError("List must have 101 numbers")
 
     non_zero_digits_count = sum([1 for i in range(1, len(numbers)) if numbers[i] != 0])
     return non_zero_digits_count + (1 if numbers[0] != 1 else 0)
 
 
-def main() -> None:
-    filename = 'data/googol.txt'
-    digits = read_from_file(filename)
-    changes_count = count_changes_to_form_googol_number(digits)
-    print(f'CHANGES TO BE MADE TO FORM A GOOGOL NUMBER: {changes_count}')
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     filename = 'data/googol.txt'
+#     digits = read_numbers_from_file(filename)
+#     changes_count = count_changes_to_form_googol_number(digits)
+#     print(f'CHANGES TO BE MADE TO FORM A GOOGOL NUMBER: {changes_count}')
+#
+#
+# if __name__ == '__main__':
+#     main()

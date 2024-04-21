@@ -3,6 +3,40 @@ from typing import Self
 from collections import defaultdict
 from typing import Callable
 
+"""
+1. Zaimplementuj klasę Klient oraz klasę Produkt. Klasa Klient posiada pola imię, nazwisko, wiek, gotówka. 
+Klasa Produkt posiada pola nazwa, kategoria, cena. Przygotuj kilka plików tekstowych. 
+W każdym pliku znajdują się wiersze, przechowujące dane o kliencie oraz w kwadratowych nawiasach
+dane o produktach, które klient zakupił. 
+Przykładowy wiersz z danymi umieszczonymi w pliku tekstowym zaprezentowano poniżej: 
+
+Jan;Kos;18;2000 [Komputer;Elektronika;2400 PanTadeusz;Ksiazka;120] 
+
+Ten sam klient może pojawiać się w wielu wierszach w kilku plikach. Ten sam produkt może być kupowany
+kilka razy nawet przez tego samego klienta. Przygotuj klasę Zakupy, która posiada pole składowe - mapę.
+Kluczem mapy jest obiekt klasy Klient, natomiast wartością mapa, która jako klucz posiada obiekt klasy Produkt,
+natomiast wartością jest liczba całkowita, określająca, ile razy klient zakupił ten produkt. Przygotuj konstruktor, 
+który jako argument pobiera nazwy plików tekstowych i wypełnia mapę danymi z plików tekstowych. Następnie 
+napisz metody, które wykorzystując operacje na kolekcjach oraz mapach 
+(programiści Java mogą stosować strumienie Java 8) rozwiążą następujące problemy:
+
+-> Wyznacz klienta, który zapłacił najwięcej za wszystkie zakupy. W osobnej metodzie wyznacz klienta, 
+który zapłacił najwięcej za zakupy z wybranej kategorii. Nazwę kategorii przekaż jako argument funkcji
+-> Wykonaj zestawienie (mapę), w którym pokażesz wiek klientów oraz kategorie produktów, 
+które najchętniej w tym wieku kupowano.
+
+-> Wykonaj zestawienie (mapę), w którym pokażesz średnią cenę produktów w danej kategorii. 
+Dodatkowo wyznacz dla każdej kategorii produkt najdroższy oraz produkt najtańszy.
+
+-> Wyznacz klientów, którzy kupowali najczęściej produkty danej kategorii. Otrzymane zestawienie zwracaj w postaci mapy.
+
+-> Sprawdź, czy klient jest w stanie zapłacić za zakupy. Żeby to stwierdzić, porównaj wartość pola przechowującego 
+ilość gotówki, którą posiada klient z sumaryczną ceną za zakupy klienta. Wykonaj mapę, w której jako klucz
+podasz klienta, natomiast jako wartość przechowasz dług, który klient musi spłacić za niezapłacone zakupy.
+Dług stanowi różnica pomiędzy kwotą do zapłaty oraz gotówką, którą posiada klient.
+
+"""
+
 
 @dataclass
 class Client:
@@ -113,11 +147,11 @@ class ShoppingService:
 
     def find_client_with_extreme_spendings_by(self, category: str, extreme_fn: Callable[[list[int]], int]) -> list[int]:
         grouped_by_category_spending = defaultdict(list)
-        for client in self.clients.keys():
-            sum_ = self.calculate_client_spendings_by_category(client, category)
-            if sum_:
-                grouped_by_category_spending[sum_].append(client)
 
+        for client in self.clients.keys():
+            total_spendings = self.calculate_client_spendings_by_category(client, category)
+            if total_spendings:
+                grouped_by_category_spending[total_spendings].append(client)
         extreme_spendings = extreme_fn(list(grouped_by_category_spending.keys()))
         return grouped_by_category_spending[extreme_spendings]
 
@@ -189,11 +223,12 @@ class ShoppingService:
 def main() -> None:
     filenames = ['clients_1.txt', 'clients_3.txt', 'clients_2.txt']
     clients = ClientsFileReader.get_clients(filenames)
+    print(clients)
 
     shopping_service = ShoppingService(clients)
-    print(shopping_service.clients)
-    print(shopping_service.find_client_with_extreme_spendings(lambda spendings: min(spendings)))
-    pr = Product("N", "Norsk", 22)
+    # print(shopping_service.clients)
+    # print(shopping_service.find_client_with_extreme_spendings(lambda spendings: min(spendings)))
+    # pr = Product("N", "Norsk", 22)
     # Ula;Bell;36;800 [Headphones;Norsk;1 CostSmA;Spanish;1]
 
     # me = Client("Ula", "Bell", 36, 900)
@@ -201,15 +236,15 @@ def main() -> None:
     # print(shopping_service.find_client_with_highest_spendings_by(pr.category))
     # print(my_spend)
     # print(shopping_service.find_client_with_highest_spendings_by("Electronics", lambda spendings: max(spendings)))
-    # print(shopping_service.get_age_category_preferences())
-    # # print(shopping_service.count_client_category_count(me, "Norsk"))
+    # print(shopping_service.get_najchetniej_kupowane_kategorie_w_wieku(36))
+    # print(shopping_service.count_client_category_count(me, "Norsk"))
     # print(shopping_service.get_clients_by_category("Norsk"))
-    print(shopping_service.get_clients_who_bought_most_in_category("Electronics"))
-    eric_ross = Client(name='Eric', surname='Ross', age=30, cash=400)
-    # print(shopping_service.clients)
+    # print(shopping_service.get_clients_who_bought_most_in_category("Electronics"))
+    # eric_ross = Client(name='Eric', surname='Ross', age=30, cash=400)
+    # # print(shopping_service.clients)
     # print(shopping_service.count_client_category_count(eric_ross, "Electronics"))
-    print(shopping_service.get_clienci_ktorzy_najczesciej_kupowali_produkty_danej_kategorii())
-    print(shopping_service.are_clients_solvent())
+    # print(shopping_service.get_clienci_ktorzy_najczesciej_kupowali_produkty_danej_kategorii())
+    # print(shopping_service.are_clients_solvent())
 
 
 if __name__ == '__main__':

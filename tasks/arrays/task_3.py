@@ -2,7 +2,6 @@ import random
 from typing import Callable
 from collections import defaultdict
 from dataclasses import dataclass, field
-from tasks.common_functions import get_number
 
 """
 Get from the user the size R of a one-dimensional array with elements of type int, and then draw elements into 
@@ -121,33 +120,33 @@ class ArrayOperations:
         return result[0] if len(result) == 1 else result
 
 
-def main() -> None:
-    array_size = get_number('Get array length')
-    print(array_size)
-    array_generator = ArrayGenerator(size=array_size, r_min=0, r_max=2 * array_size)
-    unique_numbers = array_generator.generate_unique_numbers()
-    print(f'Unique numbers: {unique_numbers}')
-    array_operations = ArrayOperations(unique_numbers)
-    smallest_number = array_operations.get_extreme_element(lambda nums: min(nums))
-    print("-------------------(SMALLEST NUMBER)-------------------")
-    print(smallest_number)
-    highest_number = array_operations.get_extreme_element(lambda nums: max(nums))
-    print("-------------------(HIGHEST NUMBER)-------------------")
-    print(highest_number)
-    print("-------------------(NUMBER/NUMBERS WITH SMALLEST DIGITS SUM)-------------------")
-    number_with_smallest_digits_sum = array_operations.process_elements_based_on_mapper(
-        lambda num: sum(int(d) for d in str(num)),
-        lambda nums: min(nums)
-    )
-    print(number_with_smallest_digits_sum)
-    print("-------------------(NUMBER/NUMBERS WITH HIGHEST DIGITS SUM)-------------------")
+# def main() -> None:
+#     array_size = get_number('Get array length')
+#     print(array_size)
+#     array_generator = ArrayGenerator(size=array_size, r_min=0, r_max=2 * array_size)
+#     unique_numbers = array_generator.generate_unique_numbers()
+#     print(f'Unique numbers: {unique_numbers}')
+#     array_operations = ArrayOperations(unique_numbers)
+#     smallest_number = array_operations.get_extreme_element(lambda nums: min(nums))
+#     print("-------------------(SMALLEST NUMBER)-------------------")
+#     print(smallest_number)
+#     highest_number = array_operations.get_extreme_element(lambda nums: max(nums))
+#     print("-------------------(HIGHEST NUMBER)-------------------")
+#     print(highest_number)
+#     print("-------------------(NUMBER/NUMBERS WITH SMALLEST DIGITS SUM)-------------------")
+#     number_with_smallest_digits_sum = array_operations.process_elements_based_on_mapper(
+#         lambda num: sum(int(d) for d in str(num)),
+#         lambda nums: min(nums)
+#     )
+#     print(number_with_smallest_digits_sum)
+#     print("-------------------(NUMBER/NUMBERS WITH HIGHEST DIGITS SUM)-------------------")
+#
+#     number_with_highest_digits_sum = array_operations.process_elements_based_on_mapper(
+#         lambda num: sum(int(d) for d in str(num)),
+#         lambda nums: max(nums)
+#     )
+#     print(number_with_highest_digits_sum)
 
-    number_with_highest_digits_sum = array_operations.process_elements_based_on_mapper(
-        lambda num: sum(int(d) for d in str(num)),
-        lambda nums: max(nums)
-    )
-    print(number_with_highest_digits_sum)
-
-
-if __name__ == '__main__':
-    main()
+#
+# if __name__ == '__main__':
+#     main()

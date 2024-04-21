@@ -3,7 +3,10 @@ import pytest
 from tasks.strings.task_2 import (
     does_string_match_regex,
     get_divisors,
-    replace_digits_with_divisors
+    get_pairs_matching_regex,
+    replace_digits_with,
+    get_digit_divisors,
+    digit_to_str
 )
 
 
@@ -29,7 +32,7 @@ class TestTask2Functions:
 
     @pytest.mark.parametrize("number, expected_divisors", [
         (0, float("inf")),
-        (1, 1),
+        (1, [1]),
         (2, [1, 2]),
         (4, [1, 2, 4]),
         (13, [1, 13]),
@@ -40,11 +43,26 @@ class TestTask2Functions:
         divisors = get_divisors(number)
         assert divisors == expected_divisors
 
-    @pytest.mark.parametrize("text, expected_modified_text", [
-        ("A0", "A151365"),
-        ("B3", "B611223366"),
-        ("X9", "X11224488")
+    @pytest.mark.parametrize("text, custom_regex, expected_result", [
+        ("BcYz", r'([A-Z])([a-z])', [('B', 'c'), ('Y', 'z')]),
+        ("2a8B9?", r'(\d)([A-Za-z])', [('2', 'a'), ('8', 'B')]),
+        ("a2c8", r'([A-Z])([a-z])', [])
     ])
-    def test_replace_digits_with_divisors(self, text, expected_modified_text):
-        modified_text = replace_digits_with_divisors(text)
-        assert modified_text == expected_modified_text
+    def test_get_pairs_matching_custom_regex(self, text, custom_regex, expected_result):
+        result = get_pairs_matching_regex(text, custom_regex)
+        assert result == expected_result
+
+    def test_get_pairs_matching_default_regex(self):
+        text = "A3E2Y4c9"
+        result = get_pairs_matching_regex(text)
+        assert result == [('A', '3'), ('E', '2'), ('Y', '4')]
+
+    def test_replace_digits_with_divisors(self):
+        text = "B8A9C4"
+        result = replace_digits_with(text, lambda d: get_digit_divisors(d))
+        assert result == "B1248A139C124"
+
+    def test_replace_digits_with_string_representation(self):
+        text = "A0C3"
+        result = replace_digits_with(text, lambda d: digit_to_str(d))
+        assert result == "AzeroCthree"

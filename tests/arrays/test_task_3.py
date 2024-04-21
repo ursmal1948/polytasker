@@ -9,7 +9,6 @@ class TestArrayGenerator(unittest.TestCase):
     def setUp(self):
         self.array_generator = ArrayGenerator(4, 0, 30)
 
-    # @patch("random.randint", return_value=10)
     def test_rand_number(self):
         with patch("random.randint") as mock_randint:
             mock_randint.return_value = 10
@@ -19,7 +18,7 @@ class TestArrayGenerator(unittest.TestCase):
 
     @patch("tasks.arrays.task_3.rand_number")
     def test_generate_unique_numbers(self, rand_number_mock):
-        rand_number_mock.side_effect = [0, 10, 20, 30]  # Seeding the mock with specific values
+        rand_number_mock.side_effect = [0, 10, 20, 30]
         unique_numbers = self.array_generator.generate_unique_numbers()
         self.assertEqual(unique_numbers, [0, 10, 20, 30])
 

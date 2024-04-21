@@ -1,5 +1,4 @@
 import random
-import string
 from typing import Callable
 from collections import defaultdict
 from algohub.data.random_number import rand_chr
@@ -48,7 +47,7 @@ def count_feature_occurrences(
     return sum(1 for c in text if feature_check(c))
 
 
-def modify_text(text: str) -> str:
+def dupliacte_uppercase_letters(text: str) -> str:
     chars = list(text)
     for i in range(len(chars)):
         char = chars[i]
@@ -62,23 +61,26 @@ def read_from_file(filename: str) -> list[str]:
         return [word.strip() for word in f.readlines()]
 
 
-def find_words_starting_with_letter(items: list[str], letter: str) -> str | list[str]:
-    return [c for c in items if c[0] == letter]
+def find_words_starting_with_letter(words: list[str], letter: str) -> list[str]:
+    return [word for word in words if word.startswith(letter)]
 
 
 def select_representative_word_by_first_letter(items: list[str]) -> dict[str, str]:
     group_by_letter = defaultdict(str)
-    for letter in string.ascii_uppercase:
+    first_letter_of_the_words = [word[0] for word in items]
+    for letter in first_letter_of_the_words:
         matching_words = find_words_starting_with_letter(items, letter)
-        selected_word = matching_words[0] if len(matching_words) == 1 else max(matching_words,
-                                                                               key=lambda word: sum(
-                                                                                   ord(char) for char in word))
-        group_by_letter[letter] = selected_word
+        if matching_words:
+            selected_word = matching_words[0] if len(matching_words) == 1 else max(matching_words,
+                                                                                   key=lambda word: sum(
+                                                                                       ord(char) for char in word))
+            group_by_letter[letter] = selected_word
+
     return dict(group_by_letter)
 
 
-def map_characters_to_representative_words(text: str, filename: str) -> str:
-    strings = read_from_file(filename)
-    representative_word = select_representative_word_by_first_letter(strings)
-    mapped_words = [representative_word[char] for char in text]
+def map_letters_to_representative_words(text: str, filename: str) -> str:
+    words = read_from_file(filename)
+    representative_word = select_representative_word_by_first_letter(words)
+    mapped_words = [representative_word[char] for char in text if char.isalpha()]
     return '|'.join(mapped_words)

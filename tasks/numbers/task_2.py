@@ -1,5 +1,6 @@
 from typing import Callable
 import random
+from algohub.algorithms.numbers.primes import is_prime_basic
 
 """
 Draw an integer until it becomes a palindrome, i.e., a number that remains the same when read
@@ -9,10 +10,10 @@ It draws a number that satisfies the specified condition and returns the result.
 """
 
 
-def draw_number_until(r_min: int,
-                      r_max: int,
-                      condition_fn: Callable[[int], bool],
-                      finisher_fn: Callable[[int], int]):
+def draw_and_process_number_with_condition(r_min: int = 100,
+                                           r_max: int = 999,
+                                           condition_fn: Callable[[int], bool] = lambda num: is_palindrome(num),
+                                           finisher_fn: Callable[[int], int] = lambda num: num):
     """
     Draws a number within a given range until a certain condition is met.
 
@@ -29,7 +30,7 @@ def draw_number_until(r_min: int,
         ValueError: If range is incorrect (r_min greater than r_max).
 
     Example:
-        r_min = 1000
+        r_min = 100
         r_max = 999
     1.
         Input:
@@ -67,11 +68,12 @@ def is_palindrome(number: int) -> bool:
     return string_representation == string_representation[::-1]
 
 
-def main() -> None:
-    result = draw_number_until(100, 999, lambda num: num > 300,
-                               lambda num: sum(int(d) for d in str(num) if int(d) % 2 == 1))
-    print(f'RESULT: {result}')
-
-
-if __name__ == '__main__':
-    main()
+# def main() -> None:
+#     # result = draw_number_until(100, 999, lambda num: num > 300,
+#     #                            lambda num: sum(int(d) for d in str(num) if int(d) % 2 == 1))
+#     # print(f'RESULT: {result}')
+#     print(draw_and_process_number_with_condition(condition_fn=lambda num: is_prime_basic(num)))
+#
+#
+# if __name__ == '__main__':
+#     main()

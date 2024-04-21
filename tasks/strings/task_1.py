@@ -1,4 +1,6 @@
 from typing import Callable
+from collections import defaultdict
+import re
 
 """
 
@@ -25,60 +27,56 @@ def get_string(message: str) -> str:
     return input(f'{message}:\n')
 
 
-def count_vowels(text: str) -> int:
+def count_chars(text: str, regex: str) -> int:
     """
-    Count the number of vowels in a given text.
+    Count the number of chars provided by regex.
 
     Parameters:
         text (str): The input text.
+        regex (str): Regular expression to check under text.
 
     Returns:
         int: The count of vowels in the text.
     """
+    matches = re.findall(regex, text, flags=re.IGNORECASE)
+    return len(matches)
 
-    return sum(1 for c in text if c.isalpha() and c.lower() in 'aeyuio')
 
-
-def get_strings_with_condition(message: str, count: int = 3, mapper_fn: Callable[[str], int] = count_vowels) -> str:
+def get_strings_until_same_chars_count(message: str, count: int = 3,
+                                       regex: str = r'[aeyuio]',
+                                       chars_count_fn: Callable[[str, str], int] = count_chars) -> str:
     """
     Get strings from the user until the number of vowels in each string is the same.
 
     Parameters:
         message (str): The message prompt for each string.
         count (int, optional): The number of strings to retrieve. Defaults to 3.
-        mapper_fn (Callable[[str], int], optional): A function to apply to each string to determine its "vowel count".
+        regex (str,optional): Regex to apply.
+        chars_count_fn (Callable[[str], int], optional): A function to apply to each string to determine its "vowel count".
             Defaults to count_vowels.
 
     Returns:
         str: A concatenated string of the inputs.
     """
-    strings = []
-    mapped_values = []
+    first_string = get_string(f'1.{message}')
+    first_word_vowels_count = chars_count_fn(first_string, regex)
+    strings = [first_string]
+    for i in range(1, count):
+        while chars_count_fn(v := get_string(f'{i + 1}. {message}'), regex) != first_word_vowels_count:
+            pass
+        strings.append(v)
 
-    while len(set(mapped_values)) != 1:
-        strings.clear()
-        mapped_values.clear()
-        for i in range(count):
-            string = get_string(f'{i + 1}.{message}')
-            strings.append(string)
-            mapped_values.append(mapper_fn(string))
     return ''.join(strings)
 
 
-# while True:
-#     strings = [get_string(f'{i + 1}.{message}') for i in range(count)]
-#     vowels_count = [mapper_fn(string) for string in strings]
-#
-#     if all(count == vowels_count[0] for count in vowels_count):
-#         return ''.join(strings)
-
-
-def rearrange_vowels_consonants(text: str) -> str:
+def rearrange_group1_group2_chars(text: str, group1_chars: str, group2_chars: str) -> str:
     """
     Rearrange the characters in the text so that vowels appear first, followed by consonants.
 
     Parameters:
         text (str): The input text.
+        group1_chars (str): First group of chars.
+        group2_chars (str): Second group of chars.
 
     Returns:
         str: The text with vowels followed by consonants.
@@ -86,8 +84,26 @@ def rearrange_vowels_consonants(text: str) -> str:
     Example:
         Input: clear
         Output: eaclr
-    """
 
-    vowels = [c for c in text if c.isalpha() and c.lower() in 'aeyuio']
-    consonants = [c for c in text if c.isalpha() and c.lower() not in 'aeyuio']
-    return "".join(vowels + consonants)
+    """
+    grouped_by_chars = defaultdict(list)
+    for char in text:
+        if char in group1_chars:
+            grouped_by_chars[group1_chars].append(char)
+        elif char in group2_chars:
+            grouped_by_chars[group2_chars].append(char)
+
+    return ''.join(grouped_by_chars[group1_chars] + grouped_by_chars[group2_chars])
+
+
+# def main() -> None:
+#     string = get_strings_until_same_chars_count("POdaj stringa", 2,
+#                                                 chars_count_fn=lambda text, regex: count_chars(text, regex))
+#     # text = rearrangr_group1_group2_chars("WAISTCOAT", 'AEYUIO', 'WSTC')
+#     print(string)
+#     string = 'SA123oj'
+#     # print(count_chars(text, r'[a-z]'))
+#
+#
+# if __name__ == '__main__':
+#     main()
