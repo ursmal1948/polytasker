@@ -20,3 +20,11 @@ class TestTask2Functions:
     def test_move_elements_to_the_end(self, numbers, indexes, expected_result):
         result = move_elements_to_the_end(numbers, indexes)
         assert result == expected_result
+
+
+class TestTask2Integration:
+    numbers = [38, 34, 35, 45, 46, 41]
+    expected_result = [38, 41, 34, 35, 45, 46]
+    indexes_with_smallest_difference = find_indexes_with_smallest_difference(numbers)
+    new_array = move_elements_to_the_end(numbers, indexes_with_smallest_difference)
+    assert expected_result == new_array

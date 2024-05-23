@@ -57,3 +57,6 @@ def move_elements_to_the_end(numbers: list[int], indexes: list[tuple[int, int]])
         else:
             not_indexed_numbers.append(numbers[i])
     return not_indexed_numbers + indexed_numbers
+
+
+
